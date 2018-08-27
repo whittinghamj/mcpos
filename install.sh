@@ -5,8 +5,8 @@ echo "MCP OS - Install Script"
 
 
 ## running as root check
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 
+if ! [ $(id -u) = 0 ]; then
+   echo "This software will only work when being installed by the 'rppt' user."
    exit 1
 fi
 
