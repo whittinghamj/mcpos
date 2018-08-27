@@ -1,7 +1,9 @@
 #!/bin/bash
 
 ## MCP OS - Install Script
+echo "-----------------------"
 echo "MCP OS - Install Script"
+echo "-----------------------"
 
 
 ## running as root check
@@ -17,6 +19,7 @@ cd /root
 
 ## update apt-get repos
 echo "Updating Repositories"
+echo " "
 cp /etc/apt/sources.list /etc/apt/sources.list.bak
 sed -i 's/main/main contrib non-free/g'  /etc/apt/sources.list
 apt-get update > /dev/null
@@ -24,17 +27,20 @@ apt-get update > /dev/null
 
 ## upgrade all packages
 echo "Upgrading Core OS"
-apt-get --force-yes -qq upgrade > /dev/null
+echo " "
+apt-get -y -qq upgrade > /dev/null
 
 
 ## install dependencies
 echo "Installing Dependencies"
-apt-get install --force-yes -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
+echo " "
+apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
 updatedb >> /dev/null
 
 
 ## download custom scripts
 echo "Downloading custom scripts"
+echo " "
 wget -q http://deltacolo.com/scripts/speedtest.sh
 rm -rf /root/.bashrc
 wget -q http://deltacolo.com/scripts/.bashrc
@@ -48,6 +54,7 @@ chmod 777 /etc/skel/myip.sh
 
 ## setup whittinghamj account
 echo "Adding mcp linux user account"
+echo " "
 useradd -m -p eioruvb9eu839ub3rv mcp
 echo "mcp:"'mcp' | chpasswd > /dev/null
 usermod --shell /bin/bash mcp
@@ -67,6 +74,7 @@ echo " StrictHostKeyChecking no" >> /root/.ssh/config
 
 ## make mcp folders
 echo "Installing MCP OS"
+echo " "
 mkdir /mcp
 cd /mcp
 
@@ -85,9 +93,11 @@ read site_api_key
 echo '<?php
 
 $config['"'"api_key"'"'] = '"'$site_api_key';" > /mcp/config.txt
+echo " "
 
 crontab crontab.txt
 
 ## reboot
 ## reboot
-echo "Machine would reboot at this stage"
+
+echo "Installation Complete - Please reboot!"
