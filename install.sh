@@ -19,17 +19,17 @@ cd /root
 echo "Updating Repositories"
 cp /etc/apt/sources.list /etc/apt/sources.list.bak
 sed -i 's/main/main contrib non-free/g'  /etc/apt/sources.list
-apt update > /dev/null
+apt-get update > /dev/null
 
 
 ## upgrade all packages
 echo "Upgrading Core OS"
-apt --force-yes -qq upgrade > /dev/null
+apt-get --force-yes -qq upgrade > /dev/null
 
 
 ## install dependencies
 echo "Installing Dependencies"
-apt install --force-yes -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping > /dev/null
+apt-get install --force-yes -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
 updatedb >> /dev/null
 
 
