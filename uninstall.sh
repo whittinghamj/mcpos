@@ -20,29 +20,28 @@ cd /root
 ## update apt-get repos
 echo "Resetting Repositories"
 echo " "
-rm -rf /etc/apt/sources.list
-mv /etc/apt/sources.list.bak /etc/apit/sources.list
+rm -rf /etc/apt/sources.list > /dev/null
+mv /etc/apt/sources.list.bak /etc/apit/sources.list > /dev/null
 apt-get update > /dev/null
 
 
 ## remove dependencies
 echo "Removing Dependencies"
 echo " "
-apt-get remove -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
-updatedb >> /dev/null
+apt-get remove -y -qq llvm-3.9 clang-3.9 software-properties-common php php-dev php-curl sshpass fping > /dev/null
 
 
 ## setup whittinghamj account
 echo "Removing mcp linux user account"
 echo " "
-deluser mcp
-rm -rf /home/mcp
+deluser mcp > /dev/null
+rm -rf /home/mcp > /dev/null
 
 
 ## make mcp folders
 echo "Removing MCP OS"
 echo " "
-rm -rf /mcp
+rm -rf /mcp > /dev/null
 
 
 
