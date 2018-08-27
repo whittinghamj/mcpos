@@ -18,11 +18,11 @@ cd /root
 
 
 ## update apt-get repos
-echo "Resetting Repositories"
-echo " "
-rm -rf /etc/apt/sources.list > /dev/null
-mv /etc/apt/sources.list.bak /etc/apit/sources.list > /dev/null
-apt-get update > /dev/null
+# echo "Resetting Repositories"
+# echo " "
+# rm -rf /etc/apt/sources.list > /dev/null
+# mv /etc/apt/sources.list.bak /etc/apit/sources.list > /dev/null
+# apt-get update > /dev/null
 
 
 ## remove dependencies
