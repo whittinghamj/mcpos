@@ -22,7 +22,8 @@ cd /root
 # echo " "
 # rm -rf /etc/apt/sources.list > /dev/null
 # mv /etc/apt/sources.list.bak /etc/apit/sources.list > /dev/null
-# apt-get update > /dev/null
+# sonos
+apt-get update > /dev/null
 
 
 ## remove dependencies

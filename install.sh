@@ -34,12 +34,13 @@ apt-get -y -qq upgrade > /dev/null
 ## install dependencies
 echo "Installing Dependencies"
 echo " "
-apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
+## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
+apt-get install -y -qq build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
 updatedb >> /dev/null
 
 
 ## download custom scripts
-echo "Downloading custom scripts"
+echo "Downloading Custom Scripts"
 echo " "
 wget -q http://deltacolo.com/scripts/speedtest.sh
 rm -rf /root/.bashrc
@@ -53,7 +54,7 @@ chmod 777 /etc/skel/myip.sh
 
 
 ## setup whittinghamj account
-echo "Adding mcp linux user account"
+echo "Adding MCP linux User Account"
 echo " "
 useradd -m -p eioruvb9eu839ub3rv mcp
 echo "mcp:"'mcp' | chpasswd > /dev/null
@@ -80,7 +81,7 @@ cd /mcp
 
 
 ## get the mcp files
-git clone https://github.com/whittinghamj/mcpos.git . --quiet
+## git clone https://github.com/whittinghamj/mcpos.git . --quiet
 
 
 ## build the config file with site api key
