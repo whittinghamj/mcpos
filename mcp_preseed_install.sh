@@ -62,7 +62,7 @@ chmod 777 target/etc/skel/myip.sh
 
 
 ## configure mcposuser account
-echo "mcposuser    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 
 ## make mcp folders
