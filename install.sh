@@ -62,7 +62,7 @@ chmod 777 /etc/skel/myip.sh
 
 
 ## configure mcposuser account
-echo "mcposuser    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 
 ## make mcp folders
@@ -96,7 +96,7 @@ echo "$UUID" > "/mcp/config.txt"
 
 
 echo " "
-echo "Installation Complete - Please reboot!"
+echo "Installation Complete"
 echo " "
 echo "System UUID: ${UUID}"
 echo "Please enter the system UUID into MCP to claim this miner."
