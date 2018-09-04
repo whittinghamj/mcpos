@@ -1,5 +1,8 @@
 #!/bin/bash
 
+UUID="$(dmidecode -s system-uuid)"
+
+
 ## MCP OS - Install Script
 echo "-----------------------"
 echo "MCP OS - Install Script"
@@ -36,6 +39,10 @@ echo "Installing Dependencies"
 echo " "
 ## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
 apt-get install -y -qq build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
+
+
+echo "Installing NVIDA Drivers"
+echo " "
 apt-get install -y -qq linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver > /dev/null
 updatedb >> /dev/null
 
@@ -54,24 +61,8 @@ cp /root/myip.sh /etc/skel
 chmod 777 /etc/skel/myip.sh
 
 
-## setup whittinghamj account
-echo "Adding MCP linux User Account"
-echo " "
-useradd -m -p eioruvb9eu839ub3rv mcp
-echo "mcp:"'mcp' | chpasswd > /dev/null
-usermod --shell /bin/bash mcp
-mkdir /home/mcp/.ssh
-echo "Host *" > /home/mcp/.ssh/config
-echo " StrictHostKeyChecking no" >> /home/mcp/.ssh/config
-chmod 400 /home/mcp/.ssh/config
-usermod -aG sudo mcp
-echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-
-## update root account
-mkdir /root/.ssh
-echo "Host *" > /root/.ssh/config
-echo " StrictHostKeyChecking no" >> /root/.ssh/config
+## configure mcposuser account
+echo "mcposuser    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 
 ## make mcp folders
@@ -86,20 +77,25 @@ cd /mcp
 
 
 ## build the config file with site api key
-touch /mcp/config.txt
-echo "\n\n"
-echo "Please enter your MCP Site API Key:"
+# touch /mcp/config.txt
+# echo "\n\n"
+# echo "Please enter your MCP Site API Key:"
 
-read site_api_key
+# read site_api_key
 
-echo '<?php
+# echo '<?php
 
-$config['"'"api_key"'"'] = '"'$site_api_key';" > /mcp/config.txt
+# $config['"'"api_key"'"'] = '"'$site_api_key';" > /mcp/config.txt
+# echo " "
+
+# crontab crontab.txt
+
+## reboot
+## reboot
+
+
 echo " "
-
-crontab crontab.txt
-
-## reboot
-## reboot
-
 echo "Installation Complete - Please reboot!"
+echo " "
+echo "System UUID: ${UUID}"
+echo "Please enter the system UUID into MCP to claim this miner."
