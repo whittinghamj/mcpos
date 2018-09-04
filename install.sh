@@ -73,11 +73,12 @@ cd /mcp
 
 
 ## get the mcp files
-## git clone https://github.com/whittinghamj/mcpos.git . --quiet
+git clone https://github.com/whittinghamj/mcpos.git . --quiet
 
 
-## build the config file with site api key
-# touch /mcp/config.txt
+## build the config file
+touch /mcp/config.txt
+echo "$UUID" > "/mcp/config.txt"
 # echo "\n\n"
 # echo "Please enter your MCP Site API Key:"
 
