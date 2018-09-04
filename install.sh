@@ -38,7 +38,7 @@ apt-get -y -qq upgrade > /dev/null
 echo "Installing Dependencies"
 echo " "
 ## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
-apt-get install -y -qq build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
+apt-get install -y -qq build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw > /dev/null
 updatedb >> /dev/null
 
 
@@ -69,12 +69,22 @@ echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 ## make mcp folders
 echo "Installing MCP OS"
 echo " "
+
 mkdir /mcp
+mkdir /mcp/logs
+
+touch /mcp/logs/deamon.log
+touch /mcp/logs/console.log
+
 cd /mcp
 
 
 ## get the mcp files
 git clone https://github.com/whittinghamj/mcpos.git . --quiet
+
+
+## set the cronfile
+crontab /mcp/crontab.txt
 
 
 ## build the config file
@@ -92,8 +102,6 @@ echo "Rig UUID: $UUID" > "/etc/motd"
 
 # $config['"'"api_key"'"'] = '"'$site_api_key';" > /mcp/config.txt
 # echo " "
-
-# crontab crontab.txt
 
 ## reboot
 ## reboot
