@@ -21,7 +21,14 @@ console_output("System IP: " . $system['ip']);
 
 include('/mcp/functions.php');
 
-function killlock(){
+function console_output($data)
+{
+	$timestamp = date("Y-m-d H:i:s", time());
+	echo "[" . $timestamp . "] - " . $data . "\n";
+}
+
+function killlock()
+{
     global $lockfile;
 	exec("rm -rf $lockfile");
 }
