@@ -17,18 +17,20 @@ $system['cpu_temp']	= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
 
 
 // sanity checks
-preg_replace( "/\r|\n| /", "", $system['id'] );
-preg_replace( "/\r|\n| /", "", $system['mac'] );
-preg_replace( "/\r|\n| /", "", $system['auth'] );
-preg_replace( "/\r|\n| /", "", $system['ip'] );
-preg_replace( "/\r|\n| /", "", $system['cpu_temp'] );
+$system['id'] 		= str_replace(array("\r", "\n", " "), '', $system['id']);
+$system['mac'] 		= str_replace(array("\r", "\n", " "), '', $system['mac']);
+$system['auth'] 	= str_replace(array("\r", "\n", " "), '', $system['auth']);
+$system['ip'] 		= str_replace(array("\r", "\n", " "), '', $system['ip']);
+$system['cpu_temp'] = str_replace(array("\r", "\n", " "), '', $system['cpu_temp']);
 
 
+// print some output
 console_output("System CPU Temp: " . $system['cpu_temp']);
 console_output("System ID: " . $system['id']);
 console_output("System Auth Code: " . $system['auth']);
 console_output("System MAC: " . $system['mac']);
 console_output("System IP: " . $system['ip']);
+
 
 function killlock()
 {
