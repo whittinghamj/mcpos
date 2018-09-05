@@ -8,7 +8,7 @@ echo "-----------------------"
 
 ## running as root check
 if ! [ $(id -u) = 0 ]; then
-   echo "This software will only work when being installed by the 'rppt' user."
+   echo "This software will only work when being installed by the 'root' user."
    exit 1
 fi
 
@@ -29,11 +29,18 @@ apt-get update > /dev/null
 ## remove dependencies
 echo "Removing Dependencies"
 echo " "
-apt-get remove -y -qq llvm-3.9 clang-3.9 software-properties-common php php-dev php-curl sshpass fping > /dev/null
+apt-get remove -y -qq php php-dev php-curl sshpass fping > /dev/null
+
+
+## revert hostname
+echo "Setting Hostname"
+echo " "
+echo 'ubuntu' > /etc/hostname
+sed -i 's/mcpos/ubuntu/' /etc/hosts
 
 
 ## setup whittinghamj account
-echo "Removing mcp linux user account"
+echo "Removing mcp Linux User Account"
 echo " "
 deluser mcp > /dev/null
 rm -rf /home/mcp > /dev/null

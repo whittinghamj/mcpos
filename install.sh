@@ -1,6 +1,9 @@
 #!/bin/bash
 
-UUID="$(dmidecode -s system-uuid)"
+## set vars
+UUID="$(dmidecode --string baseboard-serial-number | sed 's/.*ID://;s/ //g' | tr '[:upper:]' '[:lower:]')"
+MAC="$(ifconfig | grep eth0 | awk '{print $NF}' | sed 's/://g' | tr '[:upper:]' '[:lower:]')"
+AUTH="(echo $UUID | sha256sum | awk '{print $1}')"
 
 
 ## MCP OS - Install Script
@@ -11,7 +14,7 @@ echo "-----------------------"
 
 ## running as root check
 if ! [ $(id -u) = 0 ]; then
-   echo "This software will only work when being installed by the 'rppt' user."
+   echo "This software will only work when being installed by the 'root' user."
    exit 1
 fi
 
@@ -21,31 +24,31 @@ cd /root
 
 
 ## update apt-get repos
-echo "Updating Repositories"
-echo " "
-cp /etc/apt/sources.list /etc/apt/sources.list.bak
-sed -i 's/main/main contrib non-free/g'  /etc/apt/sources.list
-apt-get update > /dev/null
+# echo "Updating Repositories"
+# echo " "
+# cp /etc/apt/sources.list /etc/apt/sources.list.bak
+# sed -i 's/main/main contrib non-free/g'  /etc/apt/sources.list
+# apt-get update > /dev/null
 
 
 ## upgrade all packages
-echo "Upgrading Core OS"
-echo " "
-apt-get -y -qq upgrade > /dev/null
+# echo "Upgrading Core OS"
+# echo " "
+# apt-get -y -qq upgrade > /dev/null
 
 
 ## install dependencies
 echo "Installing Dependencies"
 echo " "
 ## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
-apt-get install -y -qq build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw > /dev/null
+apt-get install -y -qq htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw > /dev/null
 updatedb >> /dev/null
 
 
-echo "Installing NVIDIA Drivers"
-echo " "
-apt-get install -y -qq linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver > /dev/null
-apt-get install -t -qq stretch-backports nvidia-driver >> /dev/null
+## echo "Installing NVIDIA Drivers"
+## echo " "
+## apt-get install -y -qq linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver > /dev/null
+## apt-get install -t -qq stretch-backports nvidia-driver >> /dev/null
 
 
 ## download custom scripts
@@ -62,6 +65,21 @@ cp /root/myip.sh /etc/skel
 chmod 777 /etc/skel/myip.sh
 
 
+## set ssh port
+echo "Updating SSHd details"
+echo " "
+## sed -i 's/#Port 22/Port 33077/' /etc/ssh/sshd_config
+sed -i 's/#AddressFamily any/AddressFamily inet/' /etc/ssh/sshd_config
+/etc/init.d/ssh restart > /dev/null
+
+
+## set controller hostname
+echo "Setting Hostname"
+echo " "
+echo 'mcpos' > /etc/hostname
+sed -i 's/simpleminer/mcpos/' /etc/hosts
+
+
 ## configure mcposuser account
 echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -69,13 +87,21 @@ echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 ## make mcp folders
 echo "Installing MCP OS"
 echo " "
+useradd -m -p eioruvb9eu839ub3rv mcp
+echo "mcp:"'mcp' | chpasswd > /dev/null
+usermod --shell /bin/bash mcp
+mkdir /home/mcp/.ssh
+echo "Host *" > /home/mcp/.ssh/config
+echo " StrictHostKeyChecking no" >> /home/mcp/.ssh/config
+chmod 400 /home/mcp/.ssh/config
+usermod -aG sudo mcp
+echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+usermod --lock --shell /bin/nologin miner
+deluser miner
+rm -rf /home/miner
 
 mkdir /mcp
-mkdir /mcp/logs
-
-touch /mcp/logs/deamon.log
-touch /mcp/logs/console.log
-
 cd /mcp
 
 
@@ -87,9 +113,11 @@ git clone https://github.com/whittinghamj/mcpos.git . --quiet
 crontab /mcp/crontab.txt
 
 
-## build the config file
-touch /mcp/config.txt
+## build the config files
 echo "$UUID" > "/mcp/config.txt"
+echo "$UUID" > "/mcp/uuid.txt"
+echo "$MAC" > "/mcp/mac.txt"
+echo "$AUTH" > "/mcp/auth.txt"
 echo "Rig UUID: $UUID" > "/etc/motd"
 
 
@@ -110,5 +138,5 @@ echo "Rig UUID: $UUID" > "/etc/motd"
 echo " "
 echo "Installation Complete"
 echo " "
-echo "System UUID: ${UUID}"
-echo "Please enter the system UUID into MCP to claim this miner."
+echo "System Auth Code: ${AUTH}"
+echo "Please enter the System Auth Code into MCP to claim this miner."
