@@ -19,7 +19,7 @@ console_output("System Auth Code: " . $system['auth']);
 console_output("System MAC: " . $system['mac']);
 console_output("System IP: " . $system['ip']);
 
-include('functions.php');
+include('/mcp/functions.php');
 
 function killlock(){
     global $lockfile;
