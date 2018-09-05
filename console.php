@@ -2,7 +2,9 @@
 
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
-// ini_set('error_reporting', E_ALL); 
+// ini_set('error_reporting', E_ALL);
+
+include('/mcp/functions.php');
 
 $api_url = 'http://dashboard.miningcontrolpanel.com';
 
@@ -12,20 +14,11 @@ $system['auth']		= file_get_contents('/mcp/auth.txt');
 $system['ip']		= exec('sh /mcp/lan_ip.sh');
 $system['cpu_temp']	= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
 
-
 console_output("System CPU Temp: " . $system['cpu_temp']);
 console_output("System ID: " . $system['id']);
 console_output("System Auth Code: " . $system['auth']);
 console_output("System MAC: " . $system['mac']);
 console_output("System IP: " . $system['ip']);
-
-include('/mcp/functions.php');
-
-function console_output($data)
-{
-	$timestamp = date("Y-m-d H:i:s", time());
-	echo "[" . $timestamp . "] - " . $data . "\n";
-}
 
 function killlock()
 {
