@@ -17,11 +17,11 @@ $system['cpu_temp']	= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
 
 
 // sanity checks
-$system['id'] 		= str_replace(array("\r", "\n", " "), '', $system['id']);
-$system['mac'] 		= str_replace(array("\r", "\n", " "), '', $system['mac']);
-$system['auth'] 	= str_replace(array("\r", "\n", " "), '', $system['auth']);
-$system['ip'] 		= str_replace(array("\r", "\n", " "), '', $system['ip']);
-$system['cpu_temp'] = str_replace(array("\r", "\n", " "), '', $system['cpu_temp']);
+$system['id'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['id']);
+$system['mac'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['mac']);
+$system['auth'] 	= str_replace(array("\r\n", "\r", "\n", " "), '', $system['auth']);
+$system['ip'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip']);
+$system['cpu_temp'] = str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
 
 
 // print some output
