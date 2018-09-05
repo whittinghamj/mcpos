@@ -120,8 +120,12 @@ echo "$UUID" > "/mcp/config.txt"
 echo "$UUID" > "/mcp/uuid.txt"
 echo "$MAC" > "/mcp/mac.txt"
 echo "$AUTH" > "/mcp/auth.txt"
-echo "System ID: $UUID" > "/etc/motd"
+
+echo "" > /etc/motd
+echo "=======================================================================================" >> /etc/motd
+echo "System ID: $UUID" >> "/etc/motd"
 echo "System Auth Code: $AUTH" >> "/etc/motd"
+echo "=======================================================================================" >> /etc/motd
 
 
 # echo "\n\n"
@@ -143,4 +147,5 @@ echo "Installation Complete"
 echo " "
 echo "System ID: ${UUID}"
 echo "System Auth Code: ${AUTH}"
-echo "Please enter the System Auth Code into MCP to claim this miner."
+echo " "
+echo "Please enter the System ID and Auth Code into MCP to claim this miner."
