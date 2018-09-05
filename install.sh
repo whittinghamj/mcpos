@@ -65,6 +65,12 @@ cp /root/myip.sh /etc/skel
 chmod 777 /etc/skel/myip.sh
 
 
+## remove old software
+mkdir /old_software
+mv /root/utils /old_software
+mv /root/start.sh /old_software
+mv /root/xminer.sh /old_software
+
 ## set ssh port
 echo "Updating SSHd details"
 echo " "
