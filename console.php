@@ -5,8 +5,19 @@
 // ini_set('error_reporting', E_ALL); 
 
 $api_url = 'http://dashboard.miningcontrolpanel.com';
-	
-$uuid = file_get_contents('/mcp/config.txt');
+
+$system['id'] 		= file_get_contents('/mcp/config.txt');
+$system['mac'] 		= file_get_contents('/mcp/mac.txt');
+$system['auth']		= file_get_contents('/mcp/auth.txt');
+$system['ip']		= exec('sh /mcp/lan_ip.sh');
+$system['cpu_temp']	= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
+
+
+console_output("System CPU Temp: " . $system['cpu_temp']);
+console_output("System ID: " . $system['id']);
+console_output("System Auth Code: " . $system['auth']);
+console_output("System MAC: " . $system['mac']);
+console_output("System IP: " . $system['ip']);
 
 include('functions.php');
 
@@ -294,21 +305,15 @@ if($task == "miner_checkin")
 		exec("touch $lockfile");
 	}
 	
-	console_output("Running controller checkin");
+	console_output("Running Miner Checkin");
 
-	$hardware 			= exec("cat /sys/firmware/devicetree/base/model");
-	$mac_address 		= exec("cat /sys/class/net/eth0/address");
-	$ip_address 		= exec("sh /zeus/controller/lan_ip.sh");
-	$cpu_temp			= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
+	// console_output('IP Address: ' . $system['ip']);
+	// console_output('MAC Address: ' . $system['mac']);
+	// console_output('CPU Temp: ' . $cpu_temp);
 
-	console_output('Pi Hardware: ' . $hardware);
-	console_output('IP Address: ' . $ip_address);
-	console_output('MAC Address: ' . $mac_address);
-	console_output('CPU Temp: ' . $cpu_temp);
-
-	$post_url = $api_url."/api/?key=".$config['api_key']."&c=controller_checkin&ip_address=".$ip_address."&mac_address=".$mac_address."&cpu_temp=".$cpu_temp."&version=".$version."&hardware=".base64_encode($hardware);
+	$post_url = $api_url."/mcpos_api/?miner_id=".$system['id']."&miner_auth=".$system['auth']."&c=miner_checkin&ip=".$system['ip']."&mac=".$system['mac']."&cpu_temp=".$system['cpu_temp']."&version=".$version;
 	
-	// console_output("POST URL: " . $post_url);
+	console_output("POST URL: " . $post_url);
 
 	$post = file_get_contents($post_url);
 	
