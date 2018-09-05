@@ -3,7 +3,7 @@
 ## set vars
 UUID="$(dmidecode --string baseboard-serial-number | sed 's/.*ID://;s/ //g' | tr '[:upper:]' '[:lower:]')"
 MAC="$(ifconfig | grep eth0 | awk '{print $NF}' | sed 's/://g' | tr '[:upper:]' '[:lower:]')"
-AUTH="(echo $UUID | sha256sum | awk '{print $1}')"
+AUTH="$(echo $UUID | sha256sum | awk '{print $1}')"
 
 
 ## MCP OS - Install Script
@@ -78,10 +78,6 @@ echo "Setting Hostname"
 echo " "
 echo 'mcpos' > /etc/hostname
 sed -i 's/simpleminer/mcpos/' /etc/hosts
-
-
-## configure mcposuser account
-echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 
 ## make mcp folders

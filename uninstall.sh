@@ -17,15 +17,6 @@ fi
 cd /root
 
 
-## update apt-get repos
-# echo "Resetting Repositories"
-# echo " "
-# rm -rf /etc/apt/sources.list > /dev/null
-# mv /etc/apt/sources.list.bak /etc/apit/sources.list > /dev/null
-# sonos
-apt-get update > /dev/null
-
-
 ## remove dependencies
 echo "Removing Dependencies"
 echo " "
