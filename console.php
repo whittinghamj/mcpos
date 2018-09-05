@@ -17,11 +17,11 @@ $system['cpu_temp']	= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
 
 
 // sanity checks
-preg_replace( "/\r|\n/", "", $system['id'] );
-preg_replace( "/\r|\n/", "", $system['mac'] );
-preg_replace( "/\r|\n/", "", $system['auth'] );
-preg_replace( "/\r|\n/", "", $system['ip'] );
-preg_replace( "/\r|\n/", "", $system['cpu_temp'] );
+preg_replace( "/\r|\n| /", "", $system['id'] );
+preg_replace( "/\r|\n| /", "", $system['mac'] );
+preg_replace( "/\r|\n| /", "", $system['auth'] );
+preg_replace( "/\r|\n| /", "", $system['ip'] );
+preg_replace( "/\r|\n| /", "", $system['cpu_temp'] );
 
 
 console_output("System CPU Temp: " . $system['cpu_temp']);
