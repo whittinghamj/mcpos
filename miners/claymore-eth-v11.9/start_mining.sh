@@ -1,7 +1,8 @@
 #!/bin/bash
 
 location=usa
-server=stratum+tcp://cryptonight.$location.nicehash.com:3355
+# server=stratum+tcp://cryptonight.$location.nicehash.com:3355
+server=stratum+tcp://equihash.$location.nicehash.com:3357
 
 echo $server
 
