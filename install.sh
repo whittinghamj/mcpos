@@ -24,17 +24,17 @@ cd /root
 
 
 ## update apt-get repos
-# echo "Updating Repositories"
-# echo " "
-# cp /etc/apt/sources.list /etc/apt/sources.list.bak
-# sed -i 's/main/main contrib non-free/g'  /etc/apt/sources.list
-# apt-get update > /dev/null
+echo "Updating Repositories"
+echo " "
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+sed -i 's/main/main contrib non-free/g'  /etc/apt/sources.list
+apt-get update > /dev/null
 
 
 ## upgrade all packages
-# echo "Upgrading Core OS"
-# echo " "
-# apt-get -y -qq upgrade > /dev/null
+echo "Upgrading Core OS"
+echo " "
+apt-get -y -qq upgrade > /dev/null
 
 
 ## install dependencies
@@ -67,9 +67,9 @@ chmod 777 /etc/skel/myip.sh
 
 ## remove old software
 mkdir /old_software
-mv /root/utils /old_software
-mv /root/start.sh /old_software
-mv /root/xminer.sh /old_software
+mv /root/utils /old_software > /dev/null
+mv /root/start.sh /old_software > /dev/null
+mv /root/xminer.sh /old_software > /dev/null
 
 ## set ssh port
 echo "Updating SSHd details"
