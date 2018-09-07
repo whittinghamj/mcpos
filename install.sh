@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+apt-get install -y -qq net-tools dnsutils
+
+
 ## set vars
 UUID="$(dmidecode --string baseboard-serial-number | sed 's/.*ID://;s/ //g' | tr '[:upper:]' '[:lower:]')"
 MAC="$(ifconfig | grep eth0 | awk '{print $NF}' | sed 's/://g' | tr '[:upper:]' '[:lower:]')"
