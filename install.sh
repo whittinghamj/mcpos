@@ -5,7 +5,7 @@ apt-get install -y -qq net-tools dnsutils
 
 
 ## set vars
-UUID="$(dmidecode --string baseboard-serial-number | sed 's/.*ID://;s/ //g' | tr '[:upper:]' '[:lower:]')"
+UUID="$(dmidecode --string system-uuid | tr '[:upper:]' '[:lower:]')"
 MAC="$(ifconfig | grep eth0 | awk '{print $NF}' | sed 's/://g' | tr '[:upper:]' '[:lower:]')"
 AUTH="$(echo $UUID | sha256sum | awk '{print $1}')"
 
@@ -74,6 +74,7 @@ mkdir /old_software
 mv /root/utils /old_software > /dev/null
 mv /root/start.sh /old_software > /dev/null
 mv /root/xminer.sh /old_software > /dev/null
+
 
 ## set ssh port
 echo "Updating SSHd details"
