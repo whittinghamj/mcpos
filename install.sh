@@ -1,7 +1,8 @@
 #!/bin/bash
 
-
-apt-get install -y -qq net-tools dnsutils
+rm -rf /etc/apt/sources.list > /dev/null
+wget -O /etc/apt/sources.list http://miningcontrolpanel.com/mcpos/sources.list > /dev/null
+apt-get install -y -qq net-tools dnsutils > /dev/null
 
 
 ## set vars
@@ -104,9 +105,9 @@ chmod 400 /home/mcp/.ssh/config
 usermod -aG sudo mcp
 echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-usermod --lock --shell /bin/nologin miner
-deluser miner
-rm -rf /home/miner
+usermod --lock --shell /bin/nologin miner > /dev/null
+deluser miner > /dev/null
+rm -rf /home/miner > /dev/null
 
 mkdir /mcp
 cd /mcp
