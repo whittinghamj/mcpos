@@ -1,7 +1,8 @@
 #!/bin/bash
 
-rm -rf /etc/apt/sources.list > /dev/null
-wget -O /etc/apt/sources.list http://miningcontrolpanel.com/mcpos/sources.list > /dev/null
+# rm -rf /etc/apt/sources.list > /dev/null
+# wget -O /etc/apt/sources.list http://miningcontrolpanel.com/mcpos/sources.list > /dev/null
+sed -i 's/deb cdrom/#deb cdrom/g'  /etc/apt/sources.list
 apt-get install -y -qq net-tools dnsutils > /dev/null
 
 
