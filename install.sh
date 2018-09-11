@@ -5,9 +5,9 @@
 echo "MCP OS - Installation Script"
 
 ## running as root check
-if [ "0" == $(id -u) ]; then
-	echo "ERROR: Do not run this script as 'root'."
-	exit 1
+if ! [ $(id -u) = 0 ]; then
+   echo "This software will only work when being installed by the 'root' user."
+   exit 1
 fi
 
 set -e
