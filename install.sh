@@ -167,7 +167,6 @@ echo "==========================================================================
 chmod -x /etc/update-motd.d/91-release-upgrade
 
 
-echo " "
 echo "Installation Complete"
 echo " "
 echo "System ID: ${UUID}"
