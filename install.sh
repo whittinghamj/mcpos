@@ -2,10 +2,7 @@
 
 
 ## MCP OS - Install Script
-echo "-----------------------"
-echo "MCP OS - Install Script"
-echo "-----------------------"
-
+echo "MCP OS - Installation Script"
 
 ## running as root check
 if ! [ $(id -u) = 0 ]; then
