@@ -93,6 +93,15 @@ echo "Setting Hostname"
 echo " "
 echo 'mcpos' > /etc/hostname
 sed -i 's/simpleminer/mcpos/' /etc/hosts
+sed -i 's/localhost/mcpos/' /etc/hosts
+sed -i 's/miner/mcpos/' /etc/hosts
+sed -i 's/rig/mcpos/' /etc/hosts
+sed -i 's/gpu/mcpos/' /etc/hosts
+sed -i 's/mine/mcpos/' /etc/hosts
+sed -i 's/gpuminer/mcpos/' /etc/hosts
+sed -i 's/debian/mcpos/' /etc/hosts
+sed -i 's/workstation/mcpos/' /etc/hosts
+sed -i 's/server/mcpos/' /etc/hosts
 
 
 ## make mcp folders
