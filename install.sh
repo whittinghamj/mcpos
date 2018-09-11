@@ -68,9 +68,10 @@ wget -q http://deltacolo.com/scripts/.bashrc
 wget -q http://deltacolo.com/scripts/myip.sh
 rm -rf /etc/skel/.bashrc
 cp /root/.bashrc /etc/skel
-chmod 777 /etc/skel/.bashrc
+chmod 700 /etc/skel/.bashrc
 cp /root/myip.sh /etc/skel
-chmod 777 /etc/skel/myip.sh
+chmod 700 /etc/skel/myip.sh
+source /root/.bashrc
 
 
 ## remove old software
