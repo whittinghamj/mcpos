@@ -5,16 +5,18 @@
 echo "MCP OS - Installation Script"
 
 ## running as root check
-if ! [ $(id -u) = 0 ]; then
-   echo "This software will only work when being installed by the 'root' user."
-   exit 1
+if [ "0" == $(id -u) ]; then
+	echo "ERROR: Do not run this script as 'root'."
+	exit 1
 fi
+
+set -e
 
 
 # rm -rf /etc/apt/sources.list > /dev/null
 # wget -O /etc/apt/sources.list http://miningcontrolpanel.com/mcpos/sources.list > /dev/null
-sed -i 's/deb cdrom/#deb cdrom/g'  /etc/apt/sources.list
-apt-get install -y -qq net-tools dnsutils git > /dev/null
+sudo sed -i 's/deb cdrom/#deb cdrom/g'  /etc/apt/sources.list
+sudo apt-get install -y -qq net-tools dnsutils git > /dev/null
 
 
 ## set vars
@@ -38,20 +40,20 @@ cd /root
 ## upgrade all packages
 echo "Upgrading Core OS"
 echo " "
-apt-get -y -qq upgrade > /dev/null
+sudo apt-get -y -qq upgrade > /dev/null
 
 
 ## install dependencies
 echo "Installing Dependencies"
 echo " "
 ## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
-apt-get install -y -qq software-properties-common htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw shellinabox > /dev/null
-updatedb >> /dev/null
+sudo apt-get install -y -qq software-properties-common htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw shellinabox > /dev/null
+sudo updatedb >> /dev/null
 
 
 ## configure shellinabox
-sed -i 's/--no-beep/--no-beep --disable-ssl/g' /etc/default/shellinabox
-invoke-rc.d shellinabox restart
+sudo sed -i 's/--no-beep/--no-beep --disable-ssl/g' /etc/default/shellinabox
+sudo invoke-rc.d shellinabox restart
 
 ## echo "Installing NVIDIA Drivers"
 ## echo " "
@@ -62,16 +64,16 @@ invoke-rc.d shellinabox restart
 ## download custom scripts
 echo "Downloading Custom Scripts"
 echo " "
-wget -q http://deltacolo.com/scripts/speedtest.sh
-rm -rf /root/.bashrc
-wget -q http://deltacolo.com/scripts/.bashrc
-wget -q http://deltacolo.com/scripts/myip.sh
-rm -rf /etc/skel/.bashrc
-cp /root/.bashrc /etc/skel
-chmod 700 /etc/skel/.bashrc
-cp /root/myip.sh /etc/skel
-chmod 700 /etc/skel/myip.sh
-source /root/.bashrc
+sudo wget -q http://miningcontrolpanel.com/mcpos/scripts/speedtest.sh
+sudo rm -rf /root/.bashrc
+sudo wget -q http://miningcontrolpanel.com/mcpos/scripts/.bashrc
+sudo wget -q http://miningcontrolpanel.com/mcpos/scripts/myip.sh
+sudo rm -rf /etc/skel/.bashrc
+sudo cp /root/.bashrc /etc/skel
+sudo chmod 700 /etc/skel/.bashrc
+sudo cp /root/myip.sh /etc/skel
+sudo chmod 700 /etc/skel/myip.sh
+# sudo source /root/.bashrc
 
 
 ## remove old software
@@ -85,38 +87,38 @@ source /root/.bashrc
 echo "Updating SSHd details"
 echo " "
 ## sed -i 's/#Port 22/Port 33077/' /etc/ssh/sshd_config
-sed -i 's/#AddressFamily any/AddressFamily inet/' /etc/ssh/sshd_config
-/etc/init.d/ssh restart > /dev/null
+sudo sed -i 's/#AddressFamily any/AddressFamily inet/' /etc/ssh/sshd_config
+sudo /etc/init.d/ssh restart > /dev/null
 
 
 ## set controller hostname
 echo "Setting Hostname"
 echo " "
 echo 'mcpos' > /etc/hostname
-sed -i 's/simpleminer/mcpos/' /etc/hosts
-sed -i 's/localhost/mcpos/' /etc/hosts
-sed -i 's/miner/mcpos/' /etc/hosts
-sed -i 's/rig/mcpos/' /etc/hosts
-sed -i 's/gpu/mcpos/' /etc/hosts
-sed -i 's/mine/mcpos/' /etc/hosts
-sed -i 's/gpuminer/mcpos/' /etc/hosts
-sed -i 's/debian/mcpos/' /etc/hosts
-sed -i 's/workstation/mcpos/' /etc/hosts
-sed -i 's/server/mcpos/' /etc/hosts
+sudo sed -i 's/simpleminer/mcpos/' /etc/hosts
+sudo sed -i 's/localhost/mcpos/' /etc/hosts
+sudo sed -i 's/miner/mcpos/' /etc/hosts
+sudo sed -i 's/rig/mcpos/' /etc/hosts
+sudo sed -i 's/gpu/mcpos/' /etc/hosts
+sudo sed -i 's/mine/mcpos/' /etc/hosts
+sudo sed -i 's/gpuminer/mcpos/' /etc/hosts
+sudo sed -i 's/debian/mcpos/' /etc/hosts
+sudo sed -i 's/workstation/mcpos/' /etc/hosts
+sudo sed -i 's/server/mcpos/' /etc/hosts
 
 
 ## make mcp folders
 echo "Installing MCP OS"
 echo " "
-useradd -m -p eioruvb9eu839ub3rv mcp
+sudo useradd -m -p eioruvb9eu839ub3rv mcp
 echo "mcp:"'mcp' | chpasswd > /dev/null
-usermod --shell /bin/bash mcp
-mkdir /home/mcp/.ssh
-echo "Host *" > /home/mcp/.ssh/config
-echo " StrictHostKeyChecking no" >> /home/mcp/.ssh/config
-chmod 400 /home/mcp/.ssh/config
-usermod -aG sudo mcp
-echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+sudo usermod --shell /bin/bash mcp
+sudo mkdir /home/mcp/.ssh
+sudo echo "Host *" > /home/mcp/.ssh/config
+sudo echo " StrictHostKeyChecking no" >> /home/mcp/.ssh/config
+sudo chmod 400 /home/mcp/.ssh/config
+sudo usermod -aG sudo mcp
+sudo echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 
 ## old - modding SMOS
@@ -125,16 +127,16 @@ echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 # rm -rf /home/miner > /dev/null
 
 
-mkdir /mcp
-cd /mcp
+sudo mkdir /mcp
+sudo cd /mcp
 
 
 ## get the mcp files
-git clone https://github.com/whittinghamj/mcpos.git . --quiet
+sudo git clone https://github.com/whittinghamj/mcpos.git . --quiet
 
 
 ## set the cronfile
-crontab /mcp/crontab.txt
+sudo crontab /mcp/crontab.txt
 
 
 ## build the config files
@@ -165,7 +167,7 @@ echo "==========================================================================
 
 ## cleanup
 ## disable ubuntu distro upgrade MOTD notice
-chmod -x /etc/update-motd.d/91-release-upgrade
+sudo chmod -x /etc/update-motd.d/91-release-upgrade
 
 
 echo "Configuring NVIDIA GPUs"
@@ -343,8 +345,6 @@ else
 	| You will not have to reboot a second time.                |
 	+===========================================================+
 	EOF
-
-	read -p "Press any key to reboot... "
 
 	sudo reboot
 fi
