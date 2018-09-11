@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# rm -rf /etc/apt/sources.list > /dev/null
-# wget -O /etc/apt/sources.list http://miningcontrolpanel.com/mcpos/sources.list > /dev/null
-sed -i 's/deb cdrom/#deb cdrom/g'  /etc/apt/sources.list
-apt-get install -y -qq net-tools dnsutils > /dev/null
-
-
-## set vars
-UUID="$(dmidecode --string system-uuid | tr '[:upper:]' '[:lower:]')"
-MAC="$(ifconfig | grep eth0 | awk '{print $NF}' | sed 's/://g' | tr '[:upper:]' '[:lower:]')"
-AUTH="$(echo $UUID | sha256sum | awk '{print $1}')"
-
 
 ## MCP OS - Install Script
 echo "-----------------------"
@@ -25,16 +14,28 @@ if ! [ $(id -u) = 0 ]; then
 fi
 
 
+# rm -rf /etc/apt/sources.list > /dev/null
+# wget -O /etc/apt/sources.list http://miningcontrolpanel.com/mcpos/sources.list > /dev/null
+sed -i 's/deb cdrom/#deb cdrom/g'  /etc/apt/sources.list
+apt-get install -y -qq net-tools dnsutils git > /dev/null
+
+
+## set vars
+UUID="$(dmidecode --string system-uuid | tr '[:upper:]' '[:lower:]')"
+MAC="$(ifconfig | grep eth0 | awk '{print $NF}' | sed 's/://g' | tr '[:upper:]' '[:lower:]')"
+AUTH="$(echo $UUID | sha256sum | awk '{print $1}')"
+
+
 ## set base folder
 cd /root
 
 
 ## update apt-get repos
-echo "Updating Repositories"
-echo " "
-cp /etc/apt/sources.list /etc/apt/sources.list.bak
-sed -i 's/main/main contrib non-free/g'  /etc/apt/sources.list
-apt-get update > /dev/null
+# echo "Updating Repositories"
+# echo " "
+# cp /etc/apt/sources.list /etc/apt/sources.list.bak
+# sed -i 's/main/main contrib non-free/g'  /etc/apt/sources.list
+# apt-get update > /dev/null
 
 
 ## upgrade all packages
@@ -47,9 +48,13 @@ apt-get -y -qq upgrade > /dev/null
 echo "Installing Dependencies"
 echo " "
 ## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
-apt-get install -y -qq htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw > /dev/null
+apt-get install -y -qq htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw shellinabox > /dev/null
 updatedb >> /dev/null
 
+
+## configure shellinabox
+sed -i 's/--no-beep/--no-beep --disable-ssl/g' /etc/default/shellinabox
+invoke-rc.d shellinabox restart
 
 ## echo "Installing NVIDIA Drivers"
 ## echo " "
@@ -72,10 +77,10 @@ chmod 777 /etc/skel/myip.sh
 
 
 ## remove old software
-mkdir /old_software
-mv /root/utils /old_software > /dev/null
-mv /root/start.sh /old_software > /dev/null
-mv /root/xminer.sh /old_software > /dev/null
+## mkdir /old_software
+## mv /root/utils /old_software > /dev/null
+## mv /root/start.sh /old_software > /dev/null
+## mv /root/xminer.sh /old_software > /dev/null
 
 
 ## set ssh port
@@ -106,9 +111,12 @@ chmod 400 /home/mcp/.ssh/config
 usermod -aG sudo mcp
 echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-usermod --lock --shell /bin/nologin miner > /dev/null
-deluser miner > /dev/null
-rm -rf /home/miner > /dev/null
+
+## old - modding SMOS
+# usermod --lock --shell /bin/nologin miner > /dev/null
+# deluser miner > /dev/null
+# rm -rf /home/miner > /dev/null
+
 
 mkdir /mcp
 cd /mcp
@@ -147,6 +155,10 @@ echo "==========================================================================
 
 ## reboot
 ## reboot
+
+## cleanup
+## disable ubuntu distro upgrade MOTD notice
+chmod -x /etc/update-motd.d/91-release-upgrade
 
 
 echo " "

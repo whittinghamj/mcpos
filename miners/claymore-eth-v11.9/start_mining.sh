@@ -1,5 +1,10 @@
 #!/bin/bash
 
+export DISPLAY=:0
+export GPU_MAX_ALLOC_PRECENT=100
+export GPU_USE_SYNC_OBJECTS=0
+export GPU_SINGLE_ALLOC_PERCENT=100
+
 # nanopool
 # sudo nohup ./ethdcrminer64 -epool eth-us-west1.nanopool.org:9999 -ewal 0x71e377d4b4125e3c548fb8fe4c06db63f710fbc8.i216368115/admin@deltacolo.com -epsw x -mode 1 -ftime 10 > /mcp/logs/miner.log & 
 
