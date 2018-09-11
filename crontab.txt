@@ -8,6 +8,8 @@
 
 @reboot sh /mcp/boot.sh > /dev/null 2>&1
 
+@reboot sh /mcp/start_mining.sh > /dev/null 2>&1
+
 # * * * * * php -q /mcp/console.php site_jobs > /mcp/logs//console.log 2>&1
 
 * * * * * php -q /mcp/console.php miner_checkin > /dev/null 2>&1
