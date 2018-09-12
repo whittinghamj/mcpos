@@ -4,13 +4,14 @@
 // ini_set('display_errors', 1);
 // ini_set('error_reporting', E_ALL);
 
+include('/mcp/functions.php');
+
 
 $version = '1.2.2_alpha';
 
 console_output("MCP OS Controller - v".$version);
 echo "\n";
 
-include('/mcp/functions.php');
 
 // vars
 $api_url = 'http://dashboard.miningcontrolpanel.com';
