@@ -47,10 +47,10 @@ foreach(range(0, $system['gpus']['total'], 1) as $gpu_id){
 	$gpu_temp = exec('nvidia-smi -i '.$gpu_id.' --query-gpu=temperature.gpu --format=csv,noheader');
 	$gpu_fan_speed = exec('nvidia-smi -q --gpu='.$gpu_id.' |grep Fan|cut -c 38-50|grep -o \'[0-9]*\'');
 	
-	echo "GPU ID: " . $gpu_id . "\n";
-	echo "GPU Name: " . $gpu_name . "\n";
-	echo "GPU Temp: " . $gpu_temp . "C\n";
-	echo "GPU Fan: " . $gpu_fan_speed . " %\n";
+	console_output("GPU ID: " . $gpu_id);
+	console_output("GPU Name: " . $gpu_name);
+	console_output("GPU Temp: " . $gpu_temp);
+	console_output("GPU Fan: " . $gpu_fan_speed);
 }
 
 console_output("==============================");
