@@ -68,7 +68,6 @@ if($task == "miner_jobs")
 						
 			if($miner_job['miner']['id'] == $system['miner_id'])
 			{
-
 				if($miner_job['job'] == 'reboot_miner')
 				{
 					console_output("Rebooting Miner");
