@@ -26,7 +26,7 @@ $system['auth'] 			= str_replace(array("\r\n", "\r", "\n", " "), '', $system['au
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
 $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
 
-
+print_r($system);
 // print some output
 console_output("MCP Site ID: " . $system['site']['id']);
 console_output("MCP Site Key: " . $system['api_key']);
