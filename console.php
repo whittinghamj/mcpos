@@ -97,11 +97,10 @@ if($task == "miner_jobs")
 
 						print_r($result);
 
-						sleep(60);
+						sleep(5);
 
 						// code for rebooting miner
-						// exec("sh /mcp/force_reboot.sh");
-						echo "FAKE REBOOT \n";
+						exec("sh /mcp/force_reboot.sh");
 					}
 
 					if($miner_job['job'] == 'pause_miner')
