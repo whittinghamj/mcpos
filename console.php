@@ -39,8 +39,14 @@ $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $syste
 // get GPU info
 $system['gpus']['total']				= exec('nvidia-smi -L | grep "^GPU " | wc -l');
 foreach(range(0, $system['gpus']['total'], 1) as $gpu_id){
+	$gpu_name = exec('nvidia-smi -i '.$gpu_id.' --query-gpu=name --format=csv,noheader');
+	if($gpu_name == 'No devices were found')
+	{
+		break;
+	}
+
 	echo "GPU ID: " . $gpu_id . "\n";
-	echo "GPU Name: " . exec('nvidia-smi -i '.$gpu_id.' --query-gpu=name --format=csv,noheader') . "\n";
+	echo "GPU Name: " . $gpu_name . "\n";
 }
 
 
