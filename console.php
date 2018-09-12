@@ -27,7 +27,6 @@ $system['auth'] 			= str_replace(array("\r\n", "\r", "\n", " "), '', $system['au
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
 $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
 
-print_r($system);
 
 // print some output
 console_output("MCP Site ID: " . $system['site']['site']['id']);
@@ -153,9 +152,6 @@ if($task == "miner_checkin")
 	);                                                                                                                   
 
 	$result = curl_exec($ch);
-
-	print_r($result);
-
 
 	// $post_url = $api_url."/api/?miner_id=".$system['id']."&miner_auth=".$system['auth']."&c=miner_checkin&ip=".$system['ip']."&mac=".$system['mac']."&cpu_temp=".$system['cpu_temp']."&version=".$version;
 	
