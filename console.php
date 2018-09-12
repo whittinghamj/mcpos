@@ -47,8 +47,13 @@ foreach(range(0, $system['gpus']['total'], 1) as $gpu_id){
 
 	echo "GPU ID: " . $gpu_id . "\n";
 	echo "GPU Name: " . $gpu_name . "\n";
-	echo "GPU PCI: " . exec("nvidia-smi -i ".$gpu_id." --query-gpu=gpu_bus_id --format=csv,noheader | sed -e 's/\./:/' | mawk -F : '{ printf(\"%d:%d:%d\n\", \"0x\"$2, $3, $4) }'") . "\n";
 }
+
+$gpu_raw_data = exec('nvidia-smi -x -q');
+$gpu_raw_data = simplexml_load_string($gpu_raw_data);
+$gpu_raw_data = json_encode($gpu_raw_data);
+$gpu_raw_data = json_decode($gpu_raw_data,TRUE);
+print_r($gpu_raw_data);
 
 
 // print some output
