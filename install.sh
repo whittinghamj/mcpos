@@ -48,7 +48,7 @@ echo "Installing Dependencies"
 echo " "
 ## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
 sudo apt-get install -y -qq software-properties-common htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw shellinabox > /dev/null
-sudo updatedb >> /dev/null
+updatedb >> /dev/null
 
 
 ## configure shellinabox
@@ -127,8 +127,8 @@ sudo echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 # rm -rf /home/miner > /dev/null
 
 
-sudo mkdir /mcp
-sudo cd /mcp
+mkdir /mcp
+cd /mcp
 
 
 ## get the mcp files
@@ -169,13 +169,6 @@ echo "$AUTH" > "/mcp/auth.txt"
 ## disable ubuntu distro upgrade MOTD notice
 sudo chmod -x /etc/update-motd.d/91-release-upgrade
 
-echo " "
-echo " "
-echo " "
 
-echo "Installation Complete"
-echo " "
-echo "System ID: ${UUID}"
-echo "System Auth Code: ${AUTH}"
-echo " "
-echo "Please enter the System ID and Auth Code into MCP to claim this miner."
+wget -q 
+sh nvidia.sh
