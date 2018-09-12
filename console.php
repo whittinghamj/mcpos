@@ -18,11 +18,11 @@ $system['cpu_temp']			= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000
 
 
 // sanity checks
-$system['id'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['id']);
-$system['mac'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['mac']);
-$system['auth'] 	= str_replace(array("\r\n", "\r", "\n", " "), '', $system['auth']);
-$system['ip'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip']);
-$system['cpu_temp'] = str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
+$system['id'] 				= str_replace(array("\r\n", "\r", "\n", " "), '', $system['id']);
+$system['mac'] 				= str_replace(array("\r\n", "\r", "\n", " "), '', $system['mac']);
+$system['auth'] 			= str_replace(array("\r\n", "\r", "\n", " "), '', $system['auth']);
+$system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
+$system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
 
 
 // print some output
@@ -30,7 +30,7 @@ console_output("System CPU Temp: " . $system['cpu_temp']);
 console_output("System ID: " . $system['id']);
 console_output("System Auth Code: " . $system['auth']);
 console_output("System MAC: " . $system['mac']);
-console_output("System IP: " . $system['ip']);
+console_output("System IP: " . $system['ip_address']);
 
 
 function killlock()
@@ -132,9 +132,6 @@ if($task == "miner_checkin")
 	console_output('IP Address: ' . $system['ip_address']);
 	console_output('MAC Address: ' . $system['mac']);
 	console_output('CPU Temp: ' . $system['cpu_temp']);
-
-	// $miner[$count]['miner_status']	= 'online';
-	console_output('IP: ' . $system['ip'] . ' is online and mining.');
 
 	$data_string = json_encode($system);
 
