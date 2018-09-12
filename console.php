@@ -137,7 +137,7 @@ if($task == "miner_checkin")
 
 	$miner['site_id']		= $system['site_id'];
 	$miner['ip_address']	= $system['ip_address'];
-	$miner['type']			= $system['gpu'];
+	$miner['type']			= 'gpu';
 
 	$data_string = json_encode($miner);
 
