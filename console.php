@@ -130,7 +130,9 @@ if($task == "miner_checkin")
 	
 	console_output("Running Miner Checkin");
 
-	$data_string = json_encode($system);
+	$miner['ip_address']	= $system['ip_address'];
+
+	$data_string = json_encode($miner);
 
 	echo "POSTing to http://dashboard.miningcontrolpanel.com/api/?key=".$system['api_key']."&c=miner_add \n";
 	
