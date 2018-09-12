@@ -9,11 +9,12 @@ include('/mcp/functions.php');
 // vars
 $api_url = 'http://dashboard.miningcontrolpanel.com';
 
-$system['id'] 		= file_get_contents('/mcp/config.txt');
-$system['mac'] 		= file_get_contents('/mcp/mac.txt');
-$system['auth']		= file_get_contents('/mcp/auth.txt');
-$system['ip']		= exec('sh /mcp/lan_ip.sh');
-$system['cpu_temp']	= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
+$system['api_key'] 			= file_get_contents('/mcp/config.txt');
+$system['id'] 				= file_get_contents('/mcp/config.txt');
+$system['mac'] 				= file_get_contents('/mcp/mac.txt');
+$system['auth']				= file_get_contents('/mcp/auth.txt');
+$system['ip_address']		= exec('sh /mcp/lan_ip.sh');
+$system['cpu_temp']			= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
 
 
 // sanity checks
@@ -68,7 +69,7 @@ if($task == "miner_jobs")
 				console_output("Rebooting Miner");
 				
 				// code for rebooting miner
-				
+
 				$miner_job['status'] = 'complete';
 			}
 
@@ -128,15 +129,34 @@ if($task == "miner_checkin")
 	
 	console_output("Running Miner Checkin");
 
-	// console_output('IP Address: ' . $system['ip']);
-	// console_output('MAC Address: ' . $system['mac']);
-	// console_output('CPU Temp: ' . $cpu_temp);
+	console_output('IP Address: ' . $system['ip_address']);
+	console_output('MAC Address: ' . $system['mac']);
+	console_output('CPU Temp: ' . $system['cpu_temp']);
 
-	$post_url = $api_url."/mcpos_api/?miner_id=".$system['id']."&miner_auth=".$system['auth']."&c=miner_checkin&ip=".$system['ip']."&mac=".$system['mac']."&cpu_temp=".$system['cpu_temp']."&version=".$version;
+	// $miner[$count]['miner_status']	= 'online';
+	console_output('IP: ' . $system['ip'] . ' is online and mining.');
+
+	$data_string = json_encode($system);
+
+	echo "POSTing to http://dashboard.miningcontrolpanel.com/api/?key=".$system['api_key']."&c=miner_add \n";
 	
-	console_output("POST URL: " . $post_url);
+	$ch = curl_init("http://dashboard.miningcontrolpanel.com/api/?key=".$system['api_key']."&c=miner_add");                                                                      
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+		'Content-Type: application/json',                                                                                
+		'Content-Length: ' . strlen($data_string))                                                                       
+	);                                                                                                                   
 
-	$post = file_get_contents($post_url);
+	$result = curl_exec($ch);
+
+
+	// $post_url = $api_url."/api/?miner_id=".$system['id']."&miner_auth=".$system['auth']."&c=miner_checkin&ip=".$system['ip']."&mac=".$system['mac']."&cpu_temp=".$system['cpu_temp']."&version=".$version;
+	
+	// console_output("POST URL: " . $post_url);
+
+	// $post = file_get_contents($post_url);
 	
 	// killlock
 	killlock();
