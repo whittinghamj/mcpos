@@ -4,6 +4,12 @@
 // ini_set('display_errors', 1);
 // ini_set('error_reporting', E_ALL);
 
+
+$version = '1.2.2_alpha';
+
+console_output("MCP OS Controller - v".$version);
+echo "\n";
+
 include('/mcp/functions.php');
 
 // vars
@@ -14,18 +20,12 @@ $system['site']				= @file_get_contents($api_url . '/api/?key='.$system['api_key
 $system['site']				= json_decode($system['site'], true);		
 $system['site_id'] 			= $system['site']['site']['id'];
 $system['miner_id'] 		= file_get_contents('/mcp/config.txt');
-$system['mac'] 				= exec('cat /sys/class/net/*/address');
-$system['auth']				= file_get_contents('/mcp/auth.txt');
 $system['ip_address']		= exec('sh /mcp/lan_ip.sh');
-$system['cpu_temp']			= 0;
 
 
 // sanity checks
 $system['miner_id'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['miner_id']);
-$system['mac'] 				= str_replace(array("\r\n", "\r", "\n", " ", "00:00:00:00:00:00"), '', $system['mac']);
-$system['auth'] 			= str_replace(array("\r\n", "\r", "\n", " "), '', $system['auth']);
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
-$system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
 
 
 // print some output
@@ -33,10 +33,9 @@ console_output("MCP Site ID: " . $system['site']['site']['id']);
 console_output("MCP Site Key: " . $system['api_key']);
 // console_output("System CPU Temp: " . $system['cpu_temp']);
 console_output("Miner ID: " . $system['miner_id']);
-console_output("Miner Auth Code: " . $system['auth']);
-console_output("MAC: " . $system['mac']);
 console_output("IP Address: " . $system['ip_address']);
 echo "\n";
+
 
 function killlock()
 {
@@ -44,9 +43,6 @@ function killlock()
 	exec("rm -rf $lockfile");
 }
 
-$version = '1.2.2_alpha';
-
-console_output("MCP OS Controller - v".$version);
 
 $task = $argv[1];
 
@@ -153,6 +149,8 @@ if($task == "miner_checkin")
 	);                                                                                                                   
 
 	$result = curl_exec($ch);
+
+	$result = json_decode($result, TRUE);
 
 	print_r($result);
 
