@@ -36,6 +36,12 @@ $system['ip_address']		= exec('sh /mcp/lan_ip.sh');
 $system['miner_id'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['miner_id']);
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
 
+// get GPU info
+$system['gpus']['total']				= exec('nvidia-smi -L | grep "^GPU " | wc -l');
+foreach(range(0, $system['gpus']['total']) as $gpu){
+	echo "GPU ID: " . $gpu . "\n";
+}
+
 
 // print some output
 console_output("MCP Site ID: " . $system['site']['site']['id']);
@@ -178,3 +184,4 @@ if($task == "miner_checkin")
 	// killlock
 	killlock();
 }
+
