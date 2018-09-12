@@ -73,47 +73,53 @@ if($task == "miner_jobs")
 	if(isset($miner_jobs['jobs']))
 	{
 		foreach($miner_jobs['jobs'] as $miner_job){
-						
-			if($miner_job['miner']['id'] == $system['miner_id'])
+			
+			if(isset($miner_job['miner']['id']))
 			{
-				if($miner_job['job'] == 'reboot_miner')
+				if($miner_job['miner']['id'] == $system['miner_id'])
 				{
-					console_output("Rebooting Miner");
-					
-					$data_string = json_encode($miner_job['id']);
+					if($miner_job['job'] == 'reboot_miner')
+					{
+						console_output("Rebooting Miner");
+						
+						$data_string = json_encode($miner_job['id']);
 
-					$ch = curl_init($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");                                                                      
-					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
-					curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
-						'Content-Type: application/json',                                                                                
-						'Content-Length: ' . strlen($data_string))                                                                       
-					);                                                                                                                   
+						$ch = curl_init($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");                                                                      
+						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+						curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+							'Content-Type: application/json',                                                                                
+							'Content-Length: ' . strlen($data_string))                                                                       
+						);                                                                                                                   
 
-					$result = curl_exec($ch);
+						$result = curl_exec($ch);
 
-					sleep(60);
+						print_r($result);
 
-					// code for rebooting miner
-					exec("sh /mcp/force_reboot.sh");
+						sleep(60);
+
+						// code for rebooting miner
+						// exec("sh /mcp/force_reboot.sh");
+						echo "FAKE REBOOT \n";
+					}
+
+					if($miner_job['job'] == 'pause_miner')
+					{
+						console_output('Pausing Miner');
+
+						// code for pausing miner
+					}
+
+					if($miner_job['job'] == 'unpause_miner')
+					{
+						console_output('UN-Pausing Miner');
+
+						// code for restarting miner				
+					}
+
+					$job['id']		= $miner_job['id'];
 				}
-
-				if($miner_job['job'] == 'pause_miner')
-				{
-					console_output('Pausing Miner');
-
-					// code for pausing miner
-				}
-
-				if($miner_job['job'] == 'unpause_miner')
-				{
-					console_output('UN-Pausing Miner');
-
-					// code for restarting miner				
-				}
-
-				$job['id']		= $miner_job['id'];
 			}
 		}
 	}else{
