@@ -49,8 +49,8 @@ foreach(range(0, $system['gpus']['total'], 1) as $gpu_id){
 	
 	console_output("GPU ID: " . $gpu_id);
 	console_output("GPU Name: " . $gpu_name);
-	console_output("GPU Temp: " . $gpu_temp);
-	console_output("GPU Fan: " . $gpu_fan_speed);
+	console_output("GPU Temp: " . $gpu_temp . "C");
+	console_output("GPU Fan: " . $gpu_fan_speed . "%");
 }
 
 console_output("==============================");
