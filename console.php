@@ -145,6 +145,8 @@ if($task == "miner_checkin")
 
 	$result = curl_exec($ch);
 
+	print_r($result);
+
 
 	// $post_url = $api_url."/api/?miner_id=".$system['id']."&miner_auth=".$system['auth']."&c=miner_checkin&ip=".$system['ip']."&mac=".$system['mac']."&cpu_temp=".$system['cpu_temp']."&version=".$version;
 	
