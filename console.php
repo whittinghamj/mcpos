@@ -16,7 +16,7 @@ $system['id'] 				= file_get_contents('/mcp/config.txt');
 $system['mac'] 				= exec('cat /sys/class/net/*/address');
 $system['auth']				= file_get_contents('/mcp/auth.txt');
 $system['ip_address']		= exec('sh /mcp/lan_ip.sh');
-$system['cpu_temp']			= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
+$system['cpu_temp']			= 0;
 
 
 // sanity checks
@@ -26,6 +26,7 @@ $system['auth'] 			= str_replace(array("\r\n", "\r", "\n", " "), '', $system['au
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
 $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
 
+print_r($system);
 
 // print some output
 console_output("MCP Site ID: " . $system['site']['id']);
