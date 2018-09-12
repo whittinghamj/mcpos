@@ -52,9 +52,8 @@ console_output("IP Address: " . $system['ip_address']);
 echo "\n";
 
 
-function killlock()
+function killlock($lockfile)
 {
-    global $lockfile;
 	exec("rm -rf $lockfile");
 }
 
@@ -132,7 +131,7 @@ if($task == "miner_jobs")
 	}
 	
 	// killlock
-	killlock();
+	killlock($lockfile);
 }
 
 if($task == "miner_checkin")
@@ -182,6 +181,6 @@ if($task == "miner_checkin")
 	// $post = file_get_contents($post_url);
 	
 	// killlock
-	killlock();
+	killlock($lockfile);
 }
 
