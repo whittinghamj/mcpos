@@ -17,6 +17,12 @@ echo "\n";
 $api_url = 'http://dashboard.miningcontrolpanel.com';
 
 $system['api_key'] 			= file_get_contents('/mcp/site_key.txt');
+
+if($system['api_key'] == '' || $system['api_key'] == '0'){
+	console_output("Please edit /mcp/site_key.txt and enter your MCP site API key.");
+	die();
+}
+
 $system['site']				= @file_get_contents($api_url . '/api/?key='.$system['api_key'].'&c=home');
 $system['site']				= json_decode($system['site'], true);		
 $system['site_id'] 			= $system['site']['site']['id'];
