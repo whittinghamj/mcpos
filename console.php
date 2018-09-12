@@ -93,6 +93,8 @@ if($task == "miner_jobs")
 
 					$result = curl_exec($ch);
 
+					sleep(60);
+
 					// code for rebooting miner
 					exec("sh /mcp/force_reboot.sh");
 				}
