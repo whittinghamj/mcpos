@@ -10,6 +10,8 @@ include('/mcp/functions.php');
 $api_url = 'http://dashboard.miningcontrolpanel.com';
 
 $system['api_key'] 			= file_get_contents('/mcp/site_key.txt');
+$system['site']				= @file_get_contents($api_url . '/api/?key='.$system['api_key']);
+$system['site']				= json_decode($system['site'], true);		
 $system['id'] 				= file_get_contents('/mcp/config.txt');
 $system['mac'] 				= exec('cat /sys/class/net/*/address');
 $system['auth']				= file_get_contents('/mcp/auth.txt');
@@ -26,6 +28,7 @@ $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system[
 
 
 // print some output
+console_output("MCP Site ID: " . $system['site']['id']);
 console_output("MCP Site Key: " . $system['api_key']);
 // console_output("System CPU Temp: " . $system['cpu_temp']);
 console_output("System ID: " . $system['id']);
