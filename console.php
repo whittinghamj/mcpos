@@ -12,6 +12,7 @@ $api_url = 'http://dashboard.miningcontrolpanel.com';
 $system['api_key'] 			= file_get_contents('/mcp/site_key.txt');
 $system['site']				= @file_get_contents($api_url . '/api/?key='.$system['api_key'].'&c=home');
 $system['site']				= json_decode($system['site'], true);		
+$system['site_id'] 			= $system['site']['site']['id'];
 $system['id'] 				= file_get_contents('/mcp/config.txt');
 $system['mac'] 				= exec('cat /sys/class/net/*/address');
 $system['auth']				= file_get_contents('/mcp/auth.txt');
@@ -29,7 +30,7 @@ $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system[
 print_r($system);
 
 // print some output
-console_output("MCP Site ID: " . $system['site']['id']);
+console_output("MCP Site ID: " . $system['site']['site']['id']);
 console_output("MCP Site Key: " . $system['api_key']);
 // console_output("System CPU Temp: " . $system['cpu_temp']);
 console_output("System ID: " . $system['id']);
@@ -134,7 +135,9 @@ if($task == "miner_checkin")
 	
 	console_output("Running Miner Checkin");
 
+	$miner['site_id']		= $system['site_id'];
 	$miner['ip_address']	= $system['ip_address'];
+	$miner['type']			= $system['gpu'];
 
 	$data_string = json_encode($miner);
 
