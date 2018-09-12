@@ -13,7 +13,7 @@ $system['api_key'] 			= file_get_contents('/mcp/site_key.txt');
 $system['site']				= @file_get_contents($api_url . '/api/?key='.$system['api_key'].'&c=home');
 $system['site']				= json_decode($system['site'], true);		
 $system['site_id'] 			= $system['site']['site']['id'];
-$system['id'] 				= file_get_contents('/mcp/config.txt');
+$system['miner_id'] 		= file_get_contents('/mcp/config.txt');
 $system['mac'] 				= exec('cat /sys/class/net/*/address');
 $system['auth']				= file_get_contents('/mcp/auth.txt');
 $system['ip_address']		= exec('sh /mcp/lan_ip.sh');
@@ -21,7 +21,7 @@ $system['cpu_temp']			= 0;
 
 
 // sanity checks
-$system['id'] 				= str_replace(array("\r\n", "\r", "\n", " "), '', $system['id']);
+$system['miner_id'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['miner_id']);
 $system['mac'] 				= str_replace(array("\r\n", "\r", "\n", " ", "00:00:00:00:00:00"), '', $system['mac']);
 $system['auth'] 			= str_replace(array("\r\n", "\r", "\n", " "), '', $system['auth']);
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
@@ -32,10 +32,10 @@ $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system[
 console_output("MCP Site ID: " . $system['site']['site']['id']);
 console_output("MCP Site Key: " . $system['api_key']);
 // console_output("System CPU Temp: " . $system['cpu_temp']);
-console_output("System ID: " . $system['id']);
-console_output("System Auth Code: " . $system['auth']);
-console_output("System MAC: " . $system['mac']);
-console_output("System IP: " . $system['ip_address']);
+console_output("Miner ID: " . $system['miner_id']);
+console_output("Miner Auth Code: " . $system['auth']);
+console_output("MAC: " . $system['mac']);
+console_output("IP Address: " . $system['ip_address']);
 echo "\n";
 
 function killlock()
@@ -62,7 +62,7 @@ if($task == "miner_jobs")
 	
 	console_output("Getting miner jobs");
 
-	$miner_jobs_raw = file_get_contents($api_url."/mcpos_api/?miner_id=".$system['id']."&miner_auth=".$system['auth']."&c=miner_jobs");
+	$miner_jobs_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=miner_jobs&miner_id=".$system['miner_id']);
 	$miner_jobs = json_decode($miner_jobs_raw, true);
 
 	if(isset($miner_jobs['jobs']))
@@ -134,6 +134,7 @@ if($task == "miner_checkin")
 	
 	console_output("Running Miner Checkin");
 
+	$miner['miner_id']		= $system['miner_id'];
 	$miner['site_id']		= $system['site_id'];
 	$miner['ip_address']	= $system['ip_address'];
 	$miner['type']			= 'gpu';

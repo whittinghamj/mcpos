@@ -156,10 +156,10 @@ sudo crontab /mcp/crontab.txt
 
 
 ## build the config files
-echo "$UUID" > "/mcp/config.txt"
-echo "$UUID" > "/mcp/uuid.txt"
-echo "$MAC" > "/mcp/mac.txt"
-echo "$AUTH" > "/mcp/auth.txt"
+# echo "$UUID" > "/mcp/config.txt"
+# echo "$UUID" > "/mcp/uuid.txt"
+# echo "$MAC" > "/mcp/mac.txt"
+# echo "$AUTH" > "/mcp/auth.txt"
 
 # echo "" > /etc/motd
 # echo "=======================================================================================" >> /etc/motd
@@ -367,9 +367,9 @@ JUST_INSTALLED_NVIDIA_VERSION=$(dpkg -l | awk -F '[ -]' '/nvidia-[0-9]+/{print $
 
 echo "Installation Complete"
 echo " "
-echo "System ID: ${UUID}"
-echo "System Auth Code: ${AUTH}"
-echo " "
+# echo "System ID: ${UUID}"
+# echo "System Auth Code: ${AUTH}"
+# echo " "
 echo "You need to reboot this machine to start mining."
 echo "Once the machine has rebooted you will be able to"
 echo "start mining by configuring it on the MCP portal."
