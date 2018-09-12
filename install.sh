@@ -332,70 +332,44 @@ sudo apt-get remove -y fwupd
 
 JUST_INSTALLED_NVIDIA_VERSION=$(dpkg -l | awk -F '[ -]' '/nvidia-[0-9]+/{print $4}' | sort -r | head -n 1)
 
-if [ -e ~/.nvidia-version ] && [ "${JUST_INSTALLED_NVIDIA_VERSION}" == "$(cat ~/.nvidia-version)" ]; then
+#if [ -e ~/.nvidia-version ] && [ "${JUST_INSTALLED_NVIDIA_VERSION}" == "$(cat ~/.nvidia-version)" ]; then
 	# The installer has run previously, because the nvidia version is recorded.
 	# The current nvidia drivers are also the latest.
 	# there is no need to reboot.
 	# 62 wide, 60 usable, 58 used
-	cat <<- EOF
-	+===========================================================+
-	| NVidia drivers installed                                  |
-	+===========================================================+
-	EOF
-else
+#	cat <<- EOF
+#	+===========================================================+
+#	| NVidia drivers installed                                  |
+#	+===========================================================+
+#	EOF
+#else
 	# Either there is no record of nvidia driver installation (meaning probably the first time)
 	# or they are outdated (meaning we probably installed new ones)
 	# need to reboot.
 
-	echo "${JUST_INSTALLED_NVIDIA_VERSION}" > ~/.nvidia-version
+#	echo "${JUST_INSTALLED_NVIDIA_VERSION}" > ~/.nvidia-version
 
 	# 62 wide, 60 usable, 58 used
-	cat <<- EOF
-	+===========================================================+
-	| NVidia drivers installed                                  |
-	|                                                           |
-	| It looks like this version hasn't been installed before.  |
-	| Your computer will now reboot.                            |
-	|                                                           |
-	| Please run these scripts again when you log back in.      |
-	| You will not have to reboot a second time.                |
-	+===========================================================+
-	EOF
+#	cat <<- EOF
+#	+===========================================================+
+#	| NVidia drivers installed                                  |
+#	|                                                           |
+#	| It looks like this version hasn't been installed before.  |
+#	| Your computer will now reboot.                            |
+#	|                                                           |
+#	| Please run these scripts again when you log back in.      |
+#	| You will not have to reboot a second time.                |
+#	+===========================================================+
+#	EOF
 
-	sudo reboot
-fi
-
-while [[ $# -gt 0 ]]; do
-
-	key="$1"
-
-	case $key in
-	esac
-
-	shift
-done
-
-#####
-# Compute Input
-#####
-
-#####
-# Validate Input
-#####
-
-#####
-# Mining Rig Setup
-#####
-
-
-
-echo " "
-echo " "
-echo " "
+	# sudo reboot
+#fi
 
 echo "Installation Complete"
 echo " "
 echo "System ID: ${UUID}"
 echo "System Auth Code: ${AUTH}"
 echo " "
-echo "Please enter the System ID and Auth Code into MCP to claim this miner."
+echo "You need to reboot this machine to start mining."
+echo "Once the machine has rebooted you will be able to"
+echo "start mining by configuring it on the MCP portal."
