@@ -59,8 +59,6 @@ if($task == "miner_jobs")
 	
 	console_output("Getting miner jobs");
 
-	echo $api_url."/api/?key=".$system['api_key']."&c=site_jobs";
-
 	$miner_jobs_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=site_jobs&miner_id=".$system['miner_id']);
 	$miner_jobs = json_decode($miner_jobs_raw, true);
 
@@ -77,7 +75,7 @@ if($task == "miner_jobs")
 					
 					$data_string = json_encode($job);
 
-					$ch = curl_init($api_url."/api/?key=".$config['api_key']."&c=site_job_complete");                                                                      
+					$ch = curl_init($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");                                                                      
 					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 					curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
@@ -86,7 +84,7 @@ if($task == "miner_jobs")
 						'Content-Length: ' . strlen($data_string))                                                                       
 					);                                                                                                                   
 
-					// $result = curl_exec($ch);
+					$result = curl_exec($ch);
 
 					// code for rebooting miner
 					exec("sh /mcp/force_reboot.sh");
