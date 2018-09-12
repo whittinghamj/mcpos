@@ -169,6 +169,6 @@ echo "$AUTH" > "/mcp/auth.txt"
 ## disable ubuntu distro upgrade MOTD notice
 sudo chmod -x /etc/update-motd.d/91-release-upgrade
 
-
-wget -q 
+cd /root
+wget -q https://raw.githubusercontent.com/whittinghamj/mcpos/master/nvidia.sh
 sh nvidia.sh
