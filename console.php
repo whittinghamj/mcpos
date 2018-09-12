@@ -26,12 +26,13 @@ $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system[
 
 
 // print some output
-console_output("System CPU Temp: " . $system['cpu_temp']);
+console_output("MCP Site Key: " . $system['api_key']);
+// console_output("System CPU Temp: " . $system['cpu_temp']);
 console_output("System ID: " . $system['id']);
 console_output("System Auth Code: " . $system['auth']);
 console_output("System MAC: " . $system['mac']);
 console_output("System IP: " . $system['ip_address']);
-
+echo " "
 
 function killlock()
 {
@@ -128,10 +129,6 @@ if($task == "miner_checkin")
 	}
 	
 	console_output("Running Miner Checkin");
-
-	console_output('IP Address: ' . $system['ip_address']);
-	console_output('MAC Address: ' . $system['mac']);
-	console_output('CPU Temp: ' . $system['cpu_temp']);
 
 	$data_string = json_encode($system);
 
