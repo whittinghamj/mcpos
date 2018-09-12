@@ -11,7 +11,7 @@ $api_url = 'http://dashboard.miningcontrolpanel.com';
 
 $system['api_key'] 			= file_get_contents('/mcp/site_key.txt');
 $system['site']				= @file_get_contents($api_url . '/api/?key='.$system['api_key']);
-$system['site']				= json_decode($system['site'], true);		
+// $system['site']				= json_decode($system['site'], true);		
 $system['id'] 				= file_get_contents('/mcp/config.txt');
 $system['mac'] 				= exec('cat /sys/class/net/*/address');
 $system['auth']				= file_get_contents('/mcp/auth.txt');
@@ -26,7 +26,7 @@ $system['auth'] 			= str_replace(array("\r\n", "\r", "\n", " "), '', $system['au
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
 $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
 
-print_r($system);
+print_r($system['site']);
 // print some output
 console_output("MCP Site ID: " . $system['site']['id']);
 console_output("MCP Site Key: " . $system['api_key']);
