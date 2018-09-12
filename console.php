@@ -9,9 +9,9 @@ include('/mcp/functions.php');
 
 $version = '1.2.2_alpha';
 
-
+console_output("==============================");
 console_output("MCP OS Controller - v".$version);
-echo "\n";
+console_output("==============================");
 
 
 // vars
@@ -44,17 +44,16 @@ foreach(range(0, $system['gpus']['total'], 1) as $gpu_id){
 	{
 		break;
 	}
-
+	$gpu_temp = exec('nvidia-smi -i '.$gpu_id.' --query-gpu=temperature.gpu --format=csv,noheader');
+	$gpu_fan_speed = exec('nvidia-smi -q --gpu='.$gpu_id.' |grep Fan|cut -c 38-50|grep -o \'[0-9]*\'');
+	
 	echo "GPU ID: " . $gpu_id . "\n";
 	echo "GPU Name: " . $gpu_name . "\n";
+	echo "GPU Temp: " . $gpu_temp . "C\n";
+	echo "GPU Fan: " . $gpu_fan_speed . " %\n";
 }
 
-$gpu_raw_data = exec('nvidia-smi -x -q');
-$gpu_raw_data = simplexml_load_string($gpu_raw_data);
-$gpu_raw_data = json_encode($gpu_raw_data);
-$gpu_raw_data = json_decode($gpu_raw_data,TRUE);
-print_r($gpu_raw_data);
-
+console_output("==============================");
 
 // print some output
 console_output("MCP Site ID: " . $system['site']['site']['id']);
@@ -62,7 +61,7 @@ console_output("MCP Site Key: " . $system['api_key']);
 // console_output("System CPU Temp: " . $system['cpu_temp']);
 console_output("Miner ID: " . $system['miner_id']);
 console_output("IP Address: " . $system['ip_address']);
-echo "\n";
+console_output("==============================");
 
 
 function killlock($lockfile)
