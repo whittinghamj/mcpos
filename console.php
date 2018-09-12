@@ -9,9 +9,9 @@ include('/mcp/functions.php');
 // vars
 $api_url = 'http://dashboard.miningcontrolpanel.com';
 
-$system['api_key'] 			= file_get_contents('/mcp/config.txt');
+$system['api_key'] 			= file_get_contents('/mcp/site_key.txt');
 $system['id'] 				= file_get_contents('/mcp/config.txt');
-$system['mac'] 				= file_get_contents('/mcp/mac.txt');
+$system['mac'] 				= exec('cat /sys/class/net/*/address');
 $system['auth']				= file_get_contents('/mcp/auth.txt');
 $system['ip_address']		= exec('sh /mcp/lan_ip.sh');
 $system['cpu_temp']			= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000;
@@ -19,7 +19,7 @@ $system['cpu_temp']			= exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000
 
 // sanity checks
 $system['id'] 				= str_replace(array("\r\n", "\r", "\n", " "), '', $system['id']);
-$system['mac'] 				= str_replace(array("\r\n", "\r", "\n", " "), '', $system['mac']);
+$system['mac'] 				= str_replace(array("\r\n", "\r", "\n", " ", "00:00:00:00:00:00"), '', $system['mac']);
 $system['auth'] 			= str_replace(array("\r\n", "\r", "\n", " "), '', $system['auth']);
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
 $system['cpu_temp'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['cpu_temp']);
