@@ -6,6 +6,8 @@
 
 # * * * * * php -q /mcp/deamon.php 1 > /mcp/logs/deamon.log 2>&1
 
+* * * * * php -q /mcp/console.php miner_sanity > /mcp/logs//console.log 2>&1
+
 * * * * * php -q /mcp/console.php miner_start > /mcp/logs//console.log 2>&1
 
 * * * * * php -q /mcp/console.php miner_jobs > /mcp/logs//console.log 2>&1
