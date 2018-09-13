@@ -2,6 +2,25 @@
 
 echo 'The system is booting, please stand by.'
 sleep 2
+echo " "
+
+echo "#########################################"
+echo "Checking connection to Internet..."
+i=0
+while [ "$i" -le 6 ]; do
+  # timeout 10 works about 20 seconds :)
+  CZY=`host -W 10 -t SOA miningcontrolpanel.com | grep -ci "miningcontrolpanel.com"`
+  if [ "$CZY" -gt 0 ]; then
+    echo "Internet OK."
+    break
+  fi
+  i=$((i+1))
+  echo "Probing"
+done
+echo "#########################################"
+sleep 2
+echo " "
+
 
 NVIDIA=`lspci | grep VGA | grep NVIDIA | wc -l`
 ATI=`lspci | grep VGA | grep ATI | wc -l`
