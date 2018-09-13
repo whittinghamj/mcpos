@@ -1,5 +1,12 @@
 <?php
 
+include('/mcp/header.php');
+
 $user = exec('whoami');
 
-echo $user."\n";
+if($user != 'root'){
+	console_output("This script MUST be ran as the 'root' user.");
+	die();
+}
+
+echo 'script running'."\n";
