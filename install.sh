@@ -384,7 +384,7 @@ echo 'Type=idle' >> /etc/systemd/system/getty@tty1.service.d/override.conf
 
 
 ## auto tail log file on boot
-echo 'clean' >> /home/mcp/.profile
+echo 'clear' >> /home/mcp/.profile
 echo 'sudo sh /mcp/boot.sh' >> /home/mcp/.profile
 
 
