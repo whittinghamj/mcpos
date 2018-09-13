@@ -2,4 +2,4 @@
 
 $user = exec('whoami');
 
-echo $user."\n"
+echo $user."\n";
