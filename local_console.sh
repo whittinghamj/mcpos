@@ -9,7 +9,7 @@ echo "Checking connection to Internet..."
 i=0
 while [ "$i" -le 6 ]; do
   # timeout 10 works about 20 seconds :)
-  CZY=`host -W 10 -t SOA miningcontrolpanel.com | grep -ci "miningcontrolpanel.com"`
+  CZY=`host -W 10 -t SOA google.com | grep -ci "google.com"`
   if [ "$CZY" -gt 0 ]; then
     echo "Internet OK."
     break
