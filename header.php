@@ -6,6 +6,13 @@
 
 include('/mcp/functions.php');
 
+$user = exec('whoami');
+
+if($user != 'root'){
+	console_output("This script MUST be run as the 'root' user.");
+	die();
+}
+
 // vars
 $api_url = 'http://dashboard.miningcontrolpanel.com';
 $system['api_key'] 			= file_get_contents('/mcp/site_key.txt');
