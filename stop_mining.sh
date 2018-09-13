@@ -8,5 +8,6 @@ sudo kill $(ps aux | grep 'start_mining.sh' | awk '{print $2}') > /dev/null 2>&1
 sudo kill $(ps aux | grep '.php' | awk '{print $2}') > /dev/null 2>&1
 
 rm -rf /mcp/*.loc
+echo '' > /mcp/logs/mining.logs
 
-echo "Terminating all mining processes."
+echo "Terminating all mining processes and cleaning log files."
