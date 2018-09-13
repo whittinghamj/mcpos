@@ -94,6 +94,10 @@ if($task == 'miner_hashrate')
 {
 	$hashrate = exec("sh /mcp/stats.sh");
 
+	$hashrate_bits = explode(" ", $hashrate);
+
+	$hashrate = $hashrate_bits[0] . ' ' . $hashrate_bits[1];
+
 	console_output("Hashrate: " . $hashrate);
 }
 
