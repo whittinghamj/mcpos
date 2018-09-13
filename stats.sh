@@ -8,3 +8,9 @@ CONSOLE=`echo "$CONSOLE" | sed 's/&nbsp;/_/g; s/&amp;/_/g; s/&lt;/_/g; s/&gt;/_/
 CONSOLE=`echo "$CONSOLE" | sed 's/\&//g' | tr '"' "'"`
 
 echo $CONSOLE
+
+CONSOLE_SHORT_PRE=`cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | sed 's/\r/\n/g' | grep -a . | tail -n 30`
+
+echo " "
+
+echo $CONSOLE_SHORT_PRE
