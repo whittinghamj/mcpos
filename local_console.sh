@@ -1,11 +1,6 @@
 #!/bin/bash
 
-if [ -s /mcp/site_key.txt ]; then
-        echo "Please edit /mcp/site_key.txt and enter your MCP site API key."
-        echo "System will auto reboot in 60 seconds."
-        sleep 60
-        sudo sh /mcp/force_reboot.sh
-fi
+if [[ -s /mcp/site_key.txt ]]; then echo "file has something"; else echo "file is empty"; fi
 
 HASHRATE="$(sh /mcp/stats.sh)";
 UPTIME="$(uptime)";
