@@ -94,7 +94,7 @@ if($task == 'miner_hashrate')
 {
 	$hashrate = exec("sh /mcp/stats.sh");
 
-	console_output($hashrate);
+	console_output("Hashrate: " . $hashrate);
 }
 
 if($task == "miner_jobs")
