@@ -108,6 +108,19 @@ if($task == 'miner_hashrate')
 	}
 }
 
+if($task == 'miner_sanity')
+{
+	$hashrate = exec("sh /mcp/stats.sh");
+
+	if(!empty($hashrate))
+	{
+	}else{
+		exec("sudo php -q /mcp/console.php miner_stop");
+		exec("sudo php -q /mcp/console.php miner_start");
+		console_output("ERROR: No hashrate detected, restarting miner process.");
+	}
+}
+
 if($task == "miner_jobs")
 {
 	$lockfile = dirname(__FILE__) . "/console.miner_jobs.loc";
