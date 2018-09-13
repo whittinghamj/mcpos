@@ -3,7 +3,7 @@
 NVIDIA=`lspci | grep VGA | grep NVIDIA | wc -l`
 ATI=`lspci | grep VGA | grep ATI | wc -l`
 
-if[ $NVIDIA > 0]
+if[ $NVIDIA > 0];
 then
 	echo 'NVIDIA DETECTED'
 	sleep 5
