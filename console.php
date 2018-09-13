@@ -102,8 +102,8 @@ if($task == 'miner_hashrate')
 
 		console_output("Hashrate: " . $hashrate);
 	}else{
-		exec("php -q /mcp/console.php minter_stop");
-		exec("php -q /mcp/console.php minter_start");
+		exec("sudo php -q /mcp/console.php minter_stop");
+		exec("sudo php -q /mcp/console.php minter_start");
 		console_output("ERROR: No hashrate detected, restarting miner process.");
 	}
 }
