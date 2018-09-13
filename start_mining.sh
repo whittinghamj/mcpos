@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# sleep 60 seconds
+sleep 60
+
 # get worker name
 
 # pid / lock file
