@@ -1,6 +1,12 @@
 #!/bin/bash
 
-if [[ -s /mcp/site_key.txt ]]; then echo "file has something"; else echo "file is empty"; fi
+if [ -s /mcp/site_key.txt ]
+then
+     ## echo ""
+else
+     echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
+     exit 1
+fi
 
 HASHRATE="$(sh /mcp/stats.sh)";
 UPTIME="$(uptime)";
