@@ -30,6 +30,7 @@ $system['site']				= json_decode($system['site'], true);
 $system['site_id'] 			= $system['site']['site']['id'];
 $system['miner_id'] 		= file_get_contents('/mcp/config.txt');
 $system['ip_address']		= exec('sh /mcp/lan_ip.sh');
+$system['uptime']			= exec('uname -p');
 
 
 // sanity checks
