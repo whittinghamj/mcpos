@@ -48,6 +48,10 @@ if($task == 'miner_start')
 		console_output("Miner is already running, existing.");
 		die();
 	}else{
+		console_output("Starting miner...");
+
+		console_output("");
+
 		console_output("Setting: DISPLAY:0");
 		exec("export DISPLAY=:0");
 
@@ -67,8 +71,9 @@ if($task == 'miner_start')
 		exec("export GPU_FORCE_64BIT_PTR=1");
 
 		console_output("");
+
+		console_output("Miner started.");
 		
-		console_output("Starting miner.");
 		exec('sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN@equihash.eu.nicehash.com:3357 > /mcp/logs/miner.log 2>&1 </dev/null & ');
 	}
 }
