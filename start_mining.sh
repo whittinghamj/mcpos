@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## check for active internet connection
-echo "###################################################" >> /mcp/logs/miner.log
-echo "Checking connection to Internet..." >> /mcp/logs/miner.log
+echo "###################################################" > /mcp/logs/miner.log
+echo "Checking connection to Internet..." > /mcp/logs/miner.log
 i=0
 while [ "$i" -le 6 ]; do
   # timeout 10 works about 20 seconds :)
@@ -15,13 +15,13 @@ while [ "$i" -le 6 ]; do
   echo "Probing" >> /mcp/logs/miner.log
 done
 
-echo "###################################################" >> /mcp/logs/miner.log
+echo "###################################################" > /mcp/logs/miner.log
 
-echo "Registering miner at miningcontrolpanel.com... " >> /mcp/logs/miner.log
+echo "Registering miner at miningcontrolpanel.com... " > /mcp/logs/miner.log
 
-echo "###################################################" >> /mcp/logs/miner.log
+echo "###################################################" > /mcp/logs/miner.log
 
-echo "Miner is starting... " >> /mcp/logs/miner.log
+echo "Miner is starting... " > /mcp/logs/miner.log
 
 # get worker name
 
@@ -38,4 +38,4 @@ echo "Miner is starting... " >> /mcp/logs/miner.log
 # sudo nohup /mcp/miners/claymore-zec/zecminer64 -zpool equihash.eu.nicehash.com:3357 -zwal 33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN.mcpdevuk -zpsw x > /mcp/logs/miner.log & 
 
 # bminer - NVIDIA
-sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN@equihash.usa.nicehash.com:3357 >> /mcp/logs/miner.log & 
+sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN@equihash.usa.nicehash.com:3357 > /mcp/logs/miner.log & 

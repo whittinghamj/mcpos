@@ -6,9 +6,9 @@
 
 # * * * * * php -q /mcp/deamon.php 1 > /mcp/logs/deamon.log 2>&1
 
-@reboot sleep 60 && sh /mcp/boot.sh > /dev/null 2>&1
+@reboot sleep 120 && sh /mcp/boot.sh > /dev/null 2>&1
 
-@reboot sleep 65 && sh /mcp/start_mining.sh > /dev/null 2>&1
+@reboot sleep 125 && sh /mcp/start_mining.sh > /dev/null 2>&1
 
 * * * * * php -q /mcp/console.php miner_jobs > /mcp/logs//console.log 2>&1
 
