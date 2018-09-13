@@ -40,3 +40,4 @@ $version = '1.2.2_alpha';
 console_output("==============================");
 console_output("MCP OS - v".$version);
 console_output("==============================");
+console_output("");
