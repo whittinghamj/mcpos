@@ -1,12 +1,7 @@
 #!/bin/bash
 
-
-# sleep 30 seconds
-
-sleep 30
-
 ## check for active internet connection
-echo "#########################################" >> /mcp/logs/miner.log
+echo "###################################################" >> /mcp/logs/miner.log
 echo "Checking connection to Internet..." >> /mcp/logs/miner.log
 i=0
 while [ "$i" -le 6 ]; do
@@ -20,11 +15,11 @@ while [ "$i" -le 6 ]; do
   echo "Probing" >> /mcp/logs/miner.log
 done
 
-echo "#########################################" >> /mcp/logs/miner.log
+echo "###################################################" >> /mcp/logs/miner.log
 
-echo "Registering rig at miningcontrolpanel.com... " >> /mcp/logs/miner.log
+echo "Registering miner at miningcontrolpanel.com... " >> /mcp/logs/miner.log
 
-echo "#########################################" >> /mcp/logs/miner.log
+echo "###################################################" >> /mcp/logs/miner.log
 
 echo "Miner is starting... " >> /mcp/logs/miner.log
 
