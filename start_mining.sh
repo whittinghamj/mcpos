@@ -1,7 +1,33 @@
 #!/bin/bash
 
-# sleep 60 seconds
-sleep 60
+LOG_FILE = '/mcp/logs/miner.log'
+
+# sleep 30 seconds
+
+sleep 30
+
+## check for active internet connection
+echo "#########################################" > $LOG_FILE
+echo "Checking connection to Internet..." > $LOG_FILE
+i=0
+while [ "$i" -le 6 ]; do
+  # timeout 10 works about 20 seconds :)
+  CZY=`host -W 10 -t SOA miningcontrolpanel.com | grep -ci "miningcontrolpanel.com"`
+  if [ "$CZY" -gt 0 ]; then
+    echo "Internet OK." > $LOG_FILE
+    break
+  fi
+  i=$((i+1))
+  echo "Probing" > $LOG_FILE
+done
+
+echo "#########################################" > $LOG_FILE
+
+echo "Registering rig at miningcontrolpanel.com... " > $LOG_FILE
+
+echo "#########################################" > $LOG_FILE
+
+echo "Miner is starting... " > $LOG_FILE
 
 # get worker name
 
