@@ -73,6 +73,18 @@ if($task == 'miner_start')
 	}
 }
 
+if($task == 'miner_stop')
+{
+	exec("sudo kill $(ps aux | grep '/mcp/miners' | awk '{print $2}') > /dev/null 2>&1");
+	exec("sudo kill $(ps aux | grep 'start_mining.sh' | awk '{print $2}') > /dev/null 2>&1");
+	exec("sudo kill $(ps aux | grep '.php' | awk '{print $2}') > /dev/null 2>&1");
+
+	exec("rm -rf /mcp/*.loc");
+	exec("echo '' > /mcp/logs/mining.logs");
+
+	console_output("Terminating all mining processes and cleaning log files.");
+}
+
 if($task == "miner_jobs")
 {
 	$lockfile = dirname(__FILE__) . "/console.miner_jobs.loc";
