@@ -22,6 +22,7 @@ foreach(range(0, $system['gpus']['total'], 1) as $gpu_id){
 console_output("==============================");
 
 // print some output
+console_output("System Uptime: " . $system['uptime']);
 console_output("MCP Site ID: " . $system['site']['site']['id']);
 console_output("MCP Site Key: " . $system['api_key']);
 // console_output("System CPU Temp: " . $system['cpu_temp']);

@@ -30,7 +30,17 @@ $system['site']				= json_decode($system['site'], true);
 $system['site_id'] 			= $system['site']['site']['id'];
 $system['miner_id'] 		= file_get_contents('/mcp/config.txt');
 $system['ip_address']		= exec('sh /mcp/lan_ip.sh');
-$system['uptime']			= exec("uptime | awk -F'( |,|:)+' '{print $6,$7",",$8,\'hours,\',$9,\'minutes.\'}'");
+
+$uptime = @file_get_contents( "/proc/uptime");
+
+$uptime = explode(" ",$uptime);
+$uptime = $uptime[0];
+$days = explode(".",(($uptime % 31556926) / 86400));
+$hours = explode(".",((($uptime % 31556926) % 86400) / 3600));
+$minutes = explode(".",(((($uptime % 31556926) % 86400) % 3600) / 60));
+$seconds = explode(".",((((($uptime % 31556926) % 86400) % 3600) / 60) / 60));
+
+$system['uptime'] = $days[0].":".$hours[0].":".$minutes[0].":".$seconds[0];
 
 $system['miner_id'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['miner_id']);
 $system['ip_address'] 		= str_replace(array("\r\n", "\r", "\n", " "), '', $system['ip_address']);
