@@ -54,8 +54,8 @@ if [ "$NVIDIA" -gt "0" ]; then
       sleep 1
       echo "[ ${GREEN}OK${SET} ] Loading monitors."
 
-      sleep 5
-      sudo sh /mcp/local_console.sh
+      sleep 3
+      watch -n1 sudo sh /mcp/local_console.sh
       # sudo watch -n1 nvidia-smi
       exit 1
 fi
