@@ -12,4 +12,5 @@
 # /mcp/miners/silentarmy/silentarmy --use 0 -c stratum+tcp://us1-zcash.flypool.org:3333 -u t1dAGBEwP6jJVqRozRUMTp4EUzeMosAHeQz
 
 # ccminer-tpruvot-v2.3-cuda9.1
-sudo nohup /mcp/miners/ccminer-tpruvot-v2.3-cuda9.1/-a cryptonight -o stratum+tcp://cryptonight.eu.nicehash.com:3355 -u 33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN -p x
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.2/lib64
+sudo nohup /mcp/miners/ccminer-tpruvot-v2.3-cuda9.1/ccminer -a cryptonight -o stratum+tcp://cryptonight.eu.nicehash.com:3355 -u 33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN -p x
