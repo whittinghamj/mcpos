@@ -94,15 +94,17 @@ if($task == 'miner_hashrate')
 {
 	$hashrate = exec("sh /mcp/stats.sh");
 
-	$hashrate_bits = explode(" ", $hashrate);
-
-	if(is_array($hashrate_bits))
+	if(!empty($hashrate))
 	{
+		$hashrate_bits = explode(" ", $hashrate);
+
 		$hashrate = $hashrate_bits[0] . ' ' . $hashrate_bits[1];
 
 		console_output("Hashrate: " . $hashrate);
 	}else{
-		console_output("ERROR: No hashrate detected.");
+		exec("php -q /mcp/console.php minter_stop");
+		exec("php -q /mcp/console.php minter_start");
+		console_output("ERROR: No hashrate detected, restarting miner process.");
 	}
 }
 
