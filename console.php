@@ -96,9 +96,14 @@ if($task == 'miner_hashrate')
 
 	$hashrate_bits = explode(" ", $hashrate);
 
-	$hashrate = $hashrate_bits[0] . ' ' . $hashrate_bits[1];
+	if(is_array($hashrate_bits))
+	{
+		$hashrate = $hashrate_bits[0] . ' ' . $hashrate_bits[1];
 
-	console_output("Hashrate: " . $hashrate);
+		console_output("Hashrate: " . $hashrate);
+	}else{
+		console_output("ERROR: No hashrate detected.");
+	}
 }
 
 if($task == "miner_jobs")
