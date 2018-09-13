@@ -1,7 +1,7 @@
 #!/bin/bash
 
 HASHRATE="$(sh /mcp/stats.sh)";
-UPTIME="$(uptime | sed -E 's/^[^,]*up *//; s/, *[[:digit:]]* users.*//; s/min/minutes/; s/([[:digit:]]+):0?([[:digit:]]+)/\1 hours, \2 minutes/' )";
+UPTIME="$(uptime)";
 
 echo " "
 echo "System Uptime: $UPTIME"
