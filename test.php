@@ -4,7 +4,7 @@ include('/mcp/header.php');
 
 $existing_miners = exec("ps aux | grep '/mcp/miners' | awk '{print $2}' | wc -l");
 
-echo $existing_miners . " processes detected \n";
+// echo $existing_miners . " processes detected \n";
 
 if($existing_miners > 2){
 	console_output("Miner is already running, existing.");
