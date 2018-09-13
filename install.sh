@@ -144,7 +144,7 @@ sudo echo "mcp    ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 
 sudo mkdir /mcp
-sudo cd /mcp
+cd /mcp
 
 
 ## get the mcp files
