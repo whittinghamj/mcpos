@@ -383,6 +383,11 @@ echo 'ExecStart=-/sbin/agetty --noissue --autologin mcp %I $TERM' >> /etc/system
 echo 'Type=idle' >> /etc/systemd/system/getty@tty1.service.d/override.conf
 
 
+## auto tail log file on boot
+echo 'clean' >> /home/mcp/.profile
+echo 'tail -f /mcp/logs/miner.log' >> /home/mcp/.profile
+
+
 ## cleanup
 chmod 777 /mcp
 
