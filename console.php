@@ -69,7 +69,7 @@ if($task == 'miner_start')
 		console_output("");
 		
 		console_output("Starting miner.");
-		exec('sh /mcp/start_mining.sh');
+		exec('sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN@equihash.eu.nicehash.com:3357 > /mcp/logs/miner.log 2>&1 </dev/null & ');
 	}
 }
 
@@ -83,6 +83,13 @@ if($task == 'miner_stop')
 	exec("echo '' > /mcp/logs/mining.logs");
 
 	console_output("Terminating all mining processes and cleaning log files.");
+}
+
+if($task == 'miner_hashrate')
+{
+	$hashrate = exec("sh /mcp/stats.sh");
+
+	console_output($hashrate);
 }
 
 if($task == "miner_jobs")
