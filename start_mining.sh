@@ -15,4 +15,4 @@
 # sudo nohup /mcp/miners/claymore-zec/zecminer64 -zpool equihash.eu.nicehash.com:3357 -zwal 33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN.mcpdevuk -zpsw x > /mcp/logs/miner.log & 
 
 # bminer - NVIDIA
-sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN@equihash.usa.nicehash.com:3357 > /mcp/logs/miner.log & 
+sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN@equihash.eu.nicehash.com:3357 > /mcp/logs/miner.log & 
