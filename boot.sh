@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# set bash colors
 DARKGRAY='\033[1;30m'
 RED='\033[0;31m'    
 LIGHTRED='\033[1;31m'
@@ -12,16 +13,27 @@ CYAN='\033[0;36m'
 WHITE='\033[1;37m'
 SET='\033[0m'
 
-
+# remove old *.loc files
 rm -rf /mcp/*.loc
+
+# remove old *.log files
 rm -rf /mcp/logs/*
 
-
+# create new log files
 touch /mcp/logs/console.log
 touch /mcp/logs/deamon.log
 touch /mcp/logs/miner.log
 
+# improve disk writes to less
+mount -o remount,noatime,nodiratime,commit=120 /
+mount -o remount,noatime,nodiratime,commit=120 /mnt/user
+echo noop > /sys/block/sda/queue/scheduler
+sysctl vm.dirty_background_ratio=20
+sysctl vm.dirty_expire_centisecs=0
+sysctl vm.dirty_ratio=80
+sysctl vm.dirty_writeback_centisecs=0
 
+# set GPU settings
 export DISPLAY=:0
 export GPU_MAX_ALLOC_PERCENT=100
 export GPU_USE_SYNC_OBJECTS=1
@@ -29,7 +41,7 @@ export GPU_SINGLE_ALLOC_PERCENT=100
 export GPU_MAX_HEAP_SIZE=100
 export GPU_FORCE_64BIT_PTR=1
 
-
+# display cool on screen output
 echo "[ ${GREEN}OK${SET} ] Loading OS Tweaks."
 sleep 1
 
@@ -55,10 +67,11 @@ sleep 1
 echo "[ ${GREEN}OK${SET} ] Detecting installed GPUs."
 sleep 1
 
-
+# check for GPU(s)
 NVIDIA=`lspci | grep VGA | grep NVIDIA | wc -l`
 ATI=`lspci | grep VGA | grep ATI | wc -l`
 
+# NVIDIA GPU(s) found
 if [ "$NVIDIA" -gt "0" ]; then
       echo "[ ${GREEN}OK${SET} ] NVIDIA GPUs found."
       sleep 1
@@ -70,6 +83,7 @@ if [ "$NVIDIA" -gt "0" ]; then
       exit 1
 fi
 
+# ATI GPU(s) found
 if [ "$NVIDIA" -gt "0" ]; then
       echo "[ ${GREEN}OK${SET} ] ATI GPUs found."
       sleep 1
