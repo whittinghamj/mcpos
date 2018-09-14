@@ -41,6 +41,9 @@ export GPU_SINGLE_ALLOC_PERCENT=100
 export GPU_MAX_HEAP_SIZE=100
 export GPU_FORCE_64BIT_PTR=1
 
+# display cool logo
+figlet -c "MCP OS v1"
+
 # display cool on screen output
 echo "[ ${GREEN}OK${SET} ] Loading OS Tweaks."
 sleep 1
