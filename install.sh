@@ -406,11 +406,4 @@ echo 'sudo sh /mcp/boot.sh' >> /home/mcp/.profile
 chmod 777 /mcp
 
 
-echo "Installation Complete"
-echo " "
-# echo "System ID: ${UUID}"
-# echo "System Auth Code: ${AUTH}"
-# echo " "
-echo "You need to reboot this machine to start mining."
-echo "Once the machine has rebooted you will be able to"
-echo "start mining by configuring it on the MCP portal."
+sudo reboot
