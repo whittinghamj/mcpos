@@ -4,6 +4,8 @@ if [ -s /mcp/site_key.txt ]
 then
       HASHRATE="$(sh /mcp/stats.sh)";
 
+      BANDWIDTH="$(sh /mcp/get_current_bandwidth.sh)";
+
       # [ -z "$HASHRATE" ] && php -q /mcp/console.php miner_restart > /mcp/logs/miner.log
 
       UPTIME="$(uptime)";
@@ -19,6 +21,8 @@ then
       fi
 
       echo "Miner Hashrate: $HASHRATE"
+
+      echo "Bandwidth: $BANDWIDTH"
 
       echo " "
 
