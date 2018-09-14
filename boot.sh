@@ -46,7 +46,7 @@ echo "[ ${GREEN}OK${SET} ] Booting MCP OS."
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Updating MCP OS."
-sudo sh /mcp/update.sh
+# sudo sh /mcp/update.sh
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Configuring MCP OS."
