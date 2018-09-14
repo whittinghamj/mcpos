@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# install a few bits this script needs to complete
+apt-get install -y -qq figlet
 
 ## backup all files that will be modified
 mkdir /root/backup_files
@@ -15,7 +17,7 @@ cp /etc/hosts /root/backup_files/etc
 cp /etc/default/grub /root/backup_files/etc/default
 
 ## MCP OS - Install Script
-echo "MCP OS - Installation Script"
+figlet "MCP OS Install"
 
 ## running as root check
 if ! [ $(id -u) = 0 ]; then
@@ -60,7 +62,7 @@ sudo apt-get -y -qq upgrade > /dev/null
 echo "Installing Dependencies"
 echo " "
 ## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
-sudo apt-get install -y -qq aha bc screen cmake software-properties-common htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw shellinabox > /dev/null
+sudo apt-get install -y -qq figlet aha bc screen cmake software-properties-common htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw shellinabox > /dev/null
 sudo updatedb > /dev/null
 
 
