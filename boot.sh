@@ -30,18 +30,28 @@ export GPU_MAX_HEAP_SIZE=100
 export GPU_FORCE_64BIT_PTR=1
 
 
-echo "[ ${GREEN}OK${SET} ] Loading BIOS modifications."
+echo "[ ${GREEN}OK${SET} ] Loading OS Tweaks."
 sleep 1
-echo "[ ${GREEN}OK${SET} ] Loading firmware packages."
+
+echo "[ ${GREEN}OK${SET} ] Loading Software Packages."
 sleep 1
+
 echo "[ ${GREEN}OK${SET} ] Configuring firewall."
+iptables -F
+iptables -t nat -F
+iptables -X
 sleep 1
+
 echo "[ ${GREEN}OK${SET} ] Booting MCP OS."
 sleep 1
+
 echo "[ ${GREEN}OK${SET} ] Updating MCP OS."
+sudo sh /mcp/update.sh
 sleep 1
+
 echo "[ ${GREEN}OK${SET} ] Configuring MCP OS."
 sleep 1
+
 echo "[ ${GREEN}OK${SET} ] Detecting installed GPUs."
 sleep 1
 
