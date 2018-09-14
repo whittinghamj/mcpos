@@ -39,6 +39,53 @@ function killlock($lockfile)
 
 $task = $argv[1];
 
+if($task == 'miner_restart')
+{
+	exec("sudo kill $(ps aux | grep '/mcp/miners' | awk '{print $2}') > /dev/null 2>&1");
+	exec("sudo kill $(ps aux | grep 'start_mining.sh' | awk '{print $2}') > /dev/null 2>&1");
+	exec("sudo kill $(ps aux | grep '.php' | awk '{print $2}') > /dev/null 2>&1");
+
+	exec("rm -rf /mcp/*.loc");
+	exec("echo '' > /mcp/logs/mining.logs");
+
+	console_output("Terminating all mining processes and cleaning log files.");
+	
+	$existing_miners = exec("ps aux | grep '/mcp/miners' | awk '{print $2}' | wc -l");
+
+	if($existing_miners > 2){
+		console_output("Miner is already running, existing.");
+		die();
+	}else{
+		console_output("Starting miner...");
+
+		console_output("");
+
+		console_output("Setting: DISPLAY:0");
+		exec("export DISPLAY=:0");
+
+		console_output("Setting: DISGPU_MAX_ALLOC_PERCENTPLAY:100");
+		exec("export GPU_MAX_ALLOC_PERCENT=100");
+
+		console_output("Setting: GPU_USE_SYNC_OBJECTS:1");
+		exec("export GPU_USE_SYNC_OBJECTS=1");
+
+		console_output("Setting: GPU_SINGLE_ALLOC_PERCENT:100");
+		exec("export GPU_SINGLE_ALLOC_PERCENT=100");
+
+		console_output("Setting: GPU_MAX_HEAP_SIZE:100");
+		exec("export GPU_MAX_HEAP_SIZE=100");
+
+		console_output("Setting: GPU_FORCE_64BIT_PTR:1");
+		exec("export GPU_FORCE_64BIT_PTR=1");
+
+		console_output("");
+
+		console_output("Miner started.");
+		
+		exec('sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN@equihash.eu.nicehash.com:3357 > /mcp/logs/miner.log 2>&1 </dev/null & ');
+	}
+}
+
 if($task == 'miner_start')
 {
 	$existing_miners = exec("ps aux | grep '/mcp/miners' | awk '{print $2}' | wc -l");

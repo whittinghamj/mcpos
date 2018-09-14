@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
 
+## backup all files that will be modified
+mkdir /root/backup_files
+mkdir /root/backup_files/etc/apt
+cp /etc/apt/sources.list /root/backup_files/etc/apt
+
+
 ## MCP OS - Install Script
 echo "MCP OS - Installation Script"
 

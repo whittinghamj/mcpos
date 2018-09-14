@@ -3,6 +3,9 @@
 if [ -s /mcp/site_key.txt ]
 then
       HASHRATE="$(sh /mcp/stats.sh)";
+
+      [ -z "$HASHRATE" ] && php -q /mcp/console.php miner_restart > /mcp/logs/miner.log
+
       UPTIME="$(uptime)";
 
       echo " "
