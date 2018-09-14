@@ -3,9 +3,16 @@
 
 ## backup all files that will be modified
 mkdir /root/backup_files
+mkdir /root/backup_files/etc/
 mkdir /root/backup_files/etc/apt
-cp /etc/apt/sources.list /root/backup_files/etc/apt
+mkdir /root/backup_files/etc/ssh
+mkdir /root/backup_files/etc/default
 
+cp /etc/apt/sources.list /root/backup_files/etc/apt
+cp /etc/ssh/sshd_config /root/backup_files/etc/ssh
+cp /etc/hostname /root/backup_files/etc
+cp /etc/hosts /root/backup_files/etc
+cp /etc/default/grub /root/backup_files/etc/default
 
 ## MCP OS - Install Script
 echo "MCP OS - Installation Script"
