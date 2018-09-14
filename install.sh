@@ -17,7 +17,7 @@ cp /etc/hosts /root/backup_files/etc
 cp /etc/default/grub /root/backup_files/etc/default
 
 ## MCP OS - Install Script
-figlet "MCP OS Install"
+figlet -c "MCP OS Install"
 
 ## running as root check
 if ! [ $(id -u) = 0 ]; then
