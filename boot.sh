@@ -26,7 +26,7 @@ touch /mcp/logs/miner.log
 
 # improve disk writes to less
 mount -o remount,noatime,nodiratime,commit=120 / 
-mount -o remount,noatime,nodiratime,commit=120 /mnt/user
+# mount -o remount,noatime,nodiratime,commit=120 /mnt/user
 echo noop > /sys/block/sda/queue/scheduler > /dev/null
 sysctl vm.dirty_background_ratio=20 > /dev/null
 sysctl vm.dirty_expire_centisecs=0 > /dev/null
