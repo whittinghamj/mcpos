@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 # install a few bits this script needs to complete
-apt-get install -y -qq figlet
+apt-get update > /dev/null
+apt-get install -y -qq figlet > dev/null
+
+## MCP OS - Install Script
+figlet -c "MCP OS Install"
 
 ## backup all files that will be modified
 mkdir /root/backup_files
@@ -16,8 +20,6 @@ cp /etc/hostname /root/backup_files/etc
 cp /etc/hosts /root/backup_files/etc
 cp /etc/default/grub /root/backup_files/etc/default
 
-## MCP OS - Install Script
-figlet -c "MCP OS Install"
 
 ## running as root check
 if ! [ $(id -u) = 0 ]; then
@@ -212,19 +214,19 @@ NVIDIA_CUDA_REPO="http://developer.download.nvidia.com/compute/cuda/repos"
 # Read Input
 #####
 
-while [[ $# -gt 0 ]]; do
-
-	key="$1"
-
-	case $key in
-		--nvidia-ubuntu-version|-v)
-		NVIDIA_UBUNTU_VERSION="$2"
-		shift
-		;;
-	esac
-
-	shift
-done
+# while [[ $# -gt 0 ]]; do
+# 
+# 	key="$1"
+# 
+# 	case $key in
+# 		--nvidia-ubuntu-version|-v)
+# 		NVIDIA_UBUNTU_VERSION="$2"
+# 		shift
+# 		;;
+# 	esac
+# 
+# 	shift
+# done
 
 #####
 # Compute Input
