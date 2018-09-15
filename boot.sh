@@ -25,13 +25,13 @@ touch /mcp/logs/deamon.log
 touch /mcp/logs/miner.log
 
 # improve disk writes to less
-mount -o remount,noatime,nodiratime,commit=120 /
+mount -o remount,noatime,nodiratime,commit=120 / 
 mount -o remount,noatime,nodiratime,commit=120 /mnt/user
-echo noop > /sys/block/sda/queue/scheduler
-sysctl vm.dirty_background_ratio=20
-sysctl vm.dirty_expire_centisecs=0
-sysctl vm.dirty_ratio=80
-sysctl vm.dirty_writeback_centisecs=0
+echo noop > /sys/block/sda/queue/scheduler > /dev/null
+sysctl vm.dirty_background_ratio=20 > /dev/null
+sysctl vm.dirty_expire_centisecs=0 > /dev/null
+sysctl vm.dirty_ratio=80 > /dev/null
+sysctl vm.dirty_writeback_centisecs=0 > /dev/null
 
 # set GPU settings
 export DISPLAY=:0
