@@ -4,8 +4,10 @@
 apt-get update > /dev/null
 apt-get install -y -qq figlet > dev/null
 
+
 ## MCP OS - Install Script
 figlet -c "MCP OS Install"
+
 
 ## backup all files that will be modified
 mkdir /root/backup_files
@@ -27,7 +29,7 @@ if ! [ $(id -u) = 0 ]; then
    exit 1
 fi
 
-set -e
+# set -e
 
 
 # rm -rf /etc/apt/sources.list > /dev/null
