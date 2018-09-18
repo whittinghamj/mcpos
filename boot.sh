@@ -52,9 +52,9 @@ echo "[ ${GREEN}OK${SET} ] Loading Software Packages."
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Configuring firewall."
-iptables -F
-iptables -t nat -F
-iptables -X
+sudo iptables -F
+sudo iptables -t nat -F
+sudo iptables -X
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Booting MCP OS."
