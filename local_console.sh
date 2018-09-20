@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# set bash colors
+DARKGRAY='\033[1;30m'
+RED='\033[0;31m'    
+LIGHTRED='\033[1;31m'
+GREEN='\033[0;32m'    
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'    
+PURPLE='\033[0;35m'    
+LIGHTPURPLE='\033[1;35m'
+CYAN='\033[0;36m'    
+WHITE='\033[1;37m'
+SET='\033[0m'
+
 bold=$(tput bold)
 normal=$(tput sgr0)
 
@@ -15,9 +28,9 @@ echo "${bold}LAN IP${normal}: $IPADDRESS | ${bold}SSH PORT:${normal} $SSHPORT | 
 echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
-    echo "${bold}Internet Connection:${normal} Online"
+    echo "${bold}Internet Connection:${normal} ${GREEN}Online{SET}"
 else
-    echo "${bold}Internet Connection:${normal} Offline"
+    echo "${bold}Internet Connection:${normal} ${RED}Offline${SET}"
 fi
 
 
@@ -35,7 +48,7 @@ then
 else
     echo " "
 
-    echo "${bold}WARNING:${normal} Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
+    echo "${RED}${bold}WARNING:${normal}{SET} Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
 
     exit 1
 fi 
