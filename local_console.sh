@@ -1,7 +1,8 @@
 #!/bin/bash
 
 IPADDRESS=$(hostname -I) || true
-if [ "$IPADDRESS" ]; then
+if [ "$IPADDRESS" ]
+then
   ## printf "LAN IP: %s\n" "$IPADDRESS"
 fi
 
