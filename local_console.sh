@@ -33,5 +33,8 @@ then
       sudo nvidia-smi
 else
       echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
+
+      printf "LAN IP: %s\n" "$IPADDRESS / WEB SSH: http://$IPADDRESS:4200" 
+      
       exit 1
 fi 
