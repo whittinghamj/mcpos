@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IPADDRESS=$(hostname -I |tr '\n' ' ');
+IPADDRESS=$(hostname -I |tr '\n' ''|tr ' ' '');
 SSHPORT=$(sshd -T | head -n 1 | awk '{print $2}');
 
 if [ -s /mcp/site_key.txt ]
