@@ -48,7 +48,7 @@ then
 else
     echo " "
 
-    echo "${RED}!!! WARNING !!!${SET}"  | fmt -c -w $COLUMNS
+    echo "${RED}!!! WARNING !!!${SET}"
     echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
 
     exit 1
