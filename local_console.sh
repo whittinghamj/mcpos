@@ -2,7 +2,7 @@
 
 IPADDRESS=$(hostname -I)
 
-IPADDRESS="length(IPADDRESS)==${#IPADDRESS}"
+echo -e "length(FOO_NO_TRAIL_SPACE)==${#FOO_NO_TRAIL_SPACE}"
 
 if [ -s /mcp/site_key.txt ]
 then
@@ -16,7 +16,7 @@ then
 
       echo "System Health: $UPTIME"
 
-      printf "LAN IP: %s\n" "$IPADDRESS / WEB SSH: http://$IPADDRESS:4200" 
+      echo "LAN IP: %s\n" "$IPADDRESS / WEB SSH: http://$IPADDRESS:4200" 
 
       echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
 
@@ -36,7 +36,7 @@ then
 else
       echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
 
-      printf "LAN IP: %s\n" "$IPADDRESS / WEB SSH: http://$IPADDRESS:4200" 
+      echo "LAN IP: %s\n" "$IPADDRESS / WEB SSH: http://$IPADDRESS: 4200" 
 
       exit 1
 fi 
