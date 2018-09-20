@@ -1,6 +1,7 @@
 #!/bin/bash
 
-IPADDRESS=$(hostname -I);
+IP_ADDRESS=$(hostname -I);
+IPADDRESS=$IP_ADDRESS | sed -e "s/ //g";
 
 if [ -s /mcp/site_key.txt ]
 then
@@ -14,7 +15,7 @@ then
 
       echo "System Health: $UPTIME"
 
-      echo "LAN IP: %s\n" "$IPADDRESS / WEB SSH: http://$IPADDRESS: 4200" 
+      echo "LAN IP: $IPADDRESS / WEB SSH: http://$IPADDRESS: 4200" 
 
       echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
 

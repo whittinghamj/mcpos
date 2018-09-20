@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # install a few bits this script needs to complete
 apt-get update > /dev/null
