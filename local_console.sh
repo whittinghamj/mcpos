@@ -48,7 +48,8 @@ then
 else
     echo " "
 
-    echo "${RED}${bold}WARNING:${normal}${SET} Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
+    echo "${RED}!!! WARNING !!!${SET}"
+    echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
 
     exit 1
 fi 
