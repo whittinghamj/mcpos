@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IPADDRESS=$(hostname -I// /)
+IPADDRESS=$(tr -d ' ' <<< hostname -I)
 
 if [ -s /mcp/site_key.txt ]
 then
