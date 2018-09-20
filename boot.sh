@@ -81,7 +81,7 @@ if [ "$NVIDIA" -gt "0" ]; then
       echo "[ ${GREEN}OK${SET} ] Loading monitors."
 
       sleep 3
-      watch -n1 sudo sh /mcp/local_console.sh
+      watch -n1 --color sudo sh /mcp/local_console.sh
       # sudo watch -n1 nvidia-smi
       exit 1
 fi
@@ -90,5 +90,6 @@ fi
 if [ "$NVIDIA" -gt "0" ]; then
       echo "[ ${GREEN}OK${SET} ] ATI GPUs found."
       sleep 1
+      echo "No ATI monitors are installed yet."
       exit 1
 fi

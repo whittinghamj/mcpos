@@ -28,7 +28,7 @@ echo "${bold}LAN IP${normal}: $IPADDRESS | ${bold}SSH PORT:${normal} $SSHPORT | 
 echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
-    echo "${bold}Internet Connection:${normal} ${GREEN}Online{SET}"
+    echo "${bold}Internet Connection:${normal} ${GREEN}Online${SET}"
 else
     echo "${bold}Internet Connection:${normal} ${RED}Offline${SET}"
 fi
@@ -48,7 +48,7 @@ then
 else
     echo " "
 
-    echo "${RED}${bold}WARNING:${normal}{SET} Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
+    echo "${RED}${bold}WARNING:${normal}${SET} Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
 
     exit 1
 fi 
