@@ -21,16 +21,16 @@ SSHPORT=$(sshd -T | head -n 1 | awk '{print $2}');
 
 UPTIME="$(uptime)";
 
-echo "${bold}System Health:${normal} $UPTIME"
+echo "System Health: $UPTIME"
 
-echo "${bold}LAN IP${normal}: $IPADDRESS | ${bold}SSH PORT:${normal} $SSHPORT | ${bold}WEB SSH:${normal} http://$IPADDRESS:4200" 
+echo "LAN IP: $IPADDRESS | ${bold}SSH PORT:${normal} $SSHPORT | WEB SSH: http://$IPADDRESS:4200" 
 
 echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
-    echo "${bold}Internet Connection:${normal} ${GREEN}Online${SET}"
+    echo "Internet Connection: ${GREEN}Online${SET}"
 else
-    echo "${bold}Internet Connection:${normal} ${RED}Offline${SET}"
+    echo "Internet Connection: ${RED}Offline${SET}"
 fi
 
 
@@ -38,7 +38,7 @@ if [ -s /mcp/site_key.txt ]
 then
     HASHRATE="$(sh /mcp/stats.sh)";
 
-    echo "${bold}Miner Hashrate:${normal} $HASHRATE"
+    echo "Miner Hashrate: $HASHRATE"
 
     ## echo "Bandwidth: $BANDWIDTH"
 
@@ -48,7 +48,7 @@ then
 else
     echo " "
 
-    echo "${RED}!!! WARNING !!!${SET}"
+    echo -e "${RED}!!! WARNING !!!${SET}"
     echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
 
     exit 1
