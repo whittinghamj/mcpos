@@ -6,29 +6,26 @@ normal=$(tput sgr0)
 IPADDRESS=$(hostname -I | sed "s/ //g");
 SSHPORT=$(sshd -T | head -n 1 | awk '{print $2}');
 
+UPTIME="$(uptime)";
+
+echo "${bold}System Health:${normal} $UPTIME"
+
+echo "${bold}LAN IP${normal}: $IPADDRESS | ${bold}SSH PORT:${normal} $SSHPORT | ${bold}WEB SSH:${normal} http://$IPADDRESS:4200" 
+
+echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
+
+if [ $? -eq 0 ]; then
+    echo "${bold}Internet Connection:${normal} Online"
+else
+    echo "${bold}Internet Connection:${normal} Offline"
+fi
+
+
 if [ -s /mcp/site_key.txt ]
 then
       HASHRATE="$(sh /mcp/stats.sh)";
 
-      ## BANDWIDTH="$(sh /mcp/get_current_bandwidth.sh)";
-
-      # [ -z "$HASHRATE" ] && php -q /mcp/console.php miner_restart > /mcp/logs/miner.log
-
-      UPTIME="$(uptime)";
-
-      echo "${bold}System Health:${normal} $UPTIME"
-
-      echo "${bold}LAN IP${normal}: $IPADDRESS | SSH PORT: $SSHPORT | WEB SSH: http://$IPADDRESS:4200" 
-
-      echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
-
-      if [ $? -eq 0 ]; then
-              echo "Internet Connection: Online"
-      else
-              echo "Internet Connection: Offline"
-      fi
-
-      echo "Miner Hashrate: $HASHRATE"
+      echo "${bold}Miner Hashrate:${normal} $HASHRATE"
 
       ## echo "Bandwidth: $BANDWIDTH"
 
@@ -36,11 +33,8 @@ then
 
       sudo nvidia-smi
 else
+
       echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
-
-      echo " "
-
-      echo "LAN IP: $IPADDRESS | SSH PORT: $SSHPORT | WEB SSH: http://$IPADDRESS:4200" 
-
+      
       exit 1
 fi 
