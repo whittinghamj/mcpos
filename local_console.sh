@@ -23,18 +23,19 @@ fi
 
 if [ -s /mcp/site_key.txt ]
 then
-      HASHRATE="$(sh /mcp/stats.sh)";
+    HASHRATE="$(sh /mcp/stats.sh)";
 
-      echo "${bold}Miner Hashrate:${normal} $HASHRATE"
+    echo "${bold}Miner Hashrate:${normal} $HASHRATE"
 
-      ## echo "Bandwidth: $BANDWIDTH"
+    ## echo "Bandwidth: $BANDWIDTH"
 
-      echo " "
+    echo " "
 
-      sudo nvidia-smi
+    sudo nvidia-smi
 else
+    echo " "
 
-      echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
-      
-      exit 1
+    echo "Please enter your MCP Site API Key into /mcp/site_key.txt and reboot."
+
+    exit 1
 fi 
