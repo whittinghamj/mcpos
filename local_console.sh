@@ -2,7 +2,7 @@
 
 IPADDRESS=$(hostname -I)
 
-echo -e "length(FOO_NO_TRAIL_SPACE)==${#FOO_NO_TRAIL_SPACE}"
+IPADDRESS=$($IPADDRESS | tr -d ' ')
 
 if [ -s /mcp/site_key.txt ]
 then
