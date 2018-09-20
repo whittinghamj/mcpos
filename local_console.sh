@@ -1,10 +1,6 @@
 #!/bin/bash
 
-IPADDRESS=$(hostname -I) || true
-if [ "$IPADDRESS" ]
-then
-  ## printf "LAN IP: %s\n" "$IPADDRESS"
-fi
+IPADDRESS=$(hostname -I)
 
 if [ -s /mcp/site_key.txt ]
 then
