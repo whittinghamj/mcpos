@@ -1,7 +1,5 @@
 #!/bin/bash
 
-SSHPORT_BITS=$(grep "Port" /etc/ssh/sshd_config) | head -n 1
+SSHPORT=$(sshd -T | head -n 1 | awk '{print $2}')
 
-SSHPORT=$(sed -i "s/Port //g" $SSHPORT_BITS)
-
-echo $SSHPORT;
+echo "SSHPORT = " $SSHPORT;
