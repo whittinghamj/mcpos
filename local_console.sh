@@ -1,7 +1,6 @@
 #!/bin/bash
 
-IP_ADDRESS=$(hostname -I);
-IPADDRESS=$IP_ADDRESS | sed -e "s/ //g";
+IPADDRESS=$(hostname -I |tr '\n' ' ');
 SSHPORT=$(sshd -T | head -n 1 | awk '{print $2}');
 
 if [ -s /mcp/site_key.txt ]
