@@ -213,10 +213,15 @@ if($task == "miner_checkin")
 	
 	console_output("Running Miner Checkin");
 
+	$hashrate_bits = explode(" ", $hashrate);
+
+	$hashrate = $hashrate_bits[0];
+
 	$miner['miner_id']		= $system['miner_id'];
 	$miner['site_id']		= $system['site_id'];
 	$miner['ip_address']	= $system['ip_address'];
 	$miner['type']			= 'gpu';
+	$miner['hashrate']		= $hashrate;
 
 	$data_string = json_encode($miner);
 
