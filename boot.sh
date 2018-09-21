@@ -45,7 +45,7 @@ export GPU_FORCE_64BIT_PTR=1
 figlet -c "MCP OS v1"
 
 # display cool on screen output
-echo "[ ${GREEN}OK${SET} ] Loading OS Tweaks."
+echo "[ ${GREEN}OK${SET} ] Loading Core ROMs."
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Loading Software Packages."
@@ -55,6 +55,9 @@ echo "[ ${GREEN}OK${SET} ] Configuring firewall."
 sudo iptables -F
 sudo iptables -t nat -F
 sudo iptables -X
+sleep 1
+
+echo "[ ${GREEN}OK${SET} ] Connecting to Datacenters."
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Booting MCP OS."
