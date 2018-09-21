@@ -131,6 +131,7 @@ echo "Setting Hostname"
 echo " "
 echo 'mcpos' > /etc/hostname
 sudo sed -i 's/simpleminer/mcpos/' /etc/hosts
+sudo sed -i 's/ubuntu/mcpos/' /etc/hosts
 sudo sed -i 's/localhost/mcpos/' /etc/hosts
 sudo sed -i 's/miner/mcpos/' /etc/hosts
 sudo sed -i 's/rig/mcpos/' /etc/hosts
