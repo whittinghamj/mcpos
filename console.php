@@ -235,6 +235,8 @@ if($task == "miner_checkin")
 		$gpu_temp = exec('nvidia-smi -i '.$gpu_id.' --query-gpu=temperature.gpu --format=csv,noheader');
 		$gpu_fan_speed = exec('nvidia-smi -q --gpu='.$gpu_id.' |grep Fan|cut -c 38-50|grep -o \'[0-9]*\'');
 		
+		echo "GPU NAME: " . $gpu_name . "\n";
+
 		$miner_data['gpu_info'][$gpu_id]['name'] 		= $gpu_name;
 		$miner_data['gpu_info'][$gpu_id]['temp'] 		= $gpu_temp;
 		$miner_data['gpu_info'][$gpu_id]['fan_speed'] 	= $gpu_fan_speed;
