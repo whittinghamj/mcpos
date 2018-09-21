@@ -213,6 +213,8 @@ if($task == "miner_checkin")
 	
 	console_output("Running Miner Checkin");
 
+	$hashrate = exec("sh /mcp/stats.sh");
+	
 	$hashrate_bits = explode(" ", $hashrate);
 
 	$hashrate = $hashrate_bits[0];
