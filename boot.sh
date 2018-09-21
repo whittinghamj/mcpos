@@ -19,6 +19,9 @@ rm -rf /mcp/*.loc
 # remove old *.log files
 rm -rf /mcp/logs/*
 
+# stop any old miners
+php -q /mcp/console.php miner_stop > /dev/null
+
 # create new log files
 touch /mcp/logs/console.log
 touch /mcp/logs/deamon.log
