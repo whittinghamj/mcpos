@@ -16,11 +16,13 @@ SET='\033[0m'
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+MINER_ID=$(cat /mcp/config.txt);
 IPADDRESS=$(hostname -I | sed "s/ //g");
 SSHPORT=$(sshd -T | head -n 1 | awk '{print $2}');
 
 UPTIME="$(uptime)";
 
+echo "MCP Miner ID: $MINER_ID"
 echo "System Health: $UPTIME"
 
 echo "LAN IP: $IPADDRESS | SSH PORT: $SSHPORT | WEB SSH: http://$IPADDRESS:4200" 
