@@ -42,7 +42,6 @@ $task = $argv[1];
 if($task == 'miner_restart')
 {
 	exec("php -q /mcp/console.php miner_stop");
-	exec("php -q /mcp/console.php miner_start");
 }
 
 if($task == 'miner_start')
@@ -121,9 +120,9 @@ if($task == 'miner_sanity')
 
 	if(!empty($hashrate))
 	{
+		console_output("Miner is running as expected.");
 	}else{
 		exec("sudo php -q /mcp/console.php miner_stop");
-		exec("sudo php -q /mcp/console.php miner_start");
 		console_output("ERROR: No hashrate detected, restarting miner process.");
 	}
 }
