@@ -241,9 +241,9 @@ if($task == "miner_checkin")
 		
 		echo "GPU NAME: " . $gpu_name . "\n";
 
-		$miner_data['gpu_info'][$gpu_id]['name'] 		= $gpu_name;
-		$miner_data['gpu_info'][$gpu_id]['temp'] 		= $gpu_temp;
-		$miner_data['gpu_info'][$gpu_id]['fan_speed'] 	= $gpu_fan_speed;
+		// $miner_data['gpu_info'][$gpu_id]['name'] 		= $gpu_name;
+		// $miner_data['gpu_info'][$gpu_id]['temp'] 		= $gpu_temp;
+		// $miner_data['gpu_info'][$gpu_id]['fan_speed'] 	= $gpu_fan_speed;
 	}
 
 
