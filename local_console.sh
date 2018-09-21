@@ -22,8 +22,9 @@ SSHPORT=$(sshd -T | head -n 1 | awk '{print $2}');
 
 UPTIME="$(uptime)";
 
-echo "MCP Miner ID: $MINER_ID"
 echo "System Health: $UPTIME"
+
+echo "MCP Miner ID: $MINER_ID"
 
 echo "LAN IP: $IPADDRESS | SSH PORT: $SSHPORT | WEB SSH: http://$IPADDRESS:4200" 
 
