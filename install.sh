@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # install a few bits this script needs to complete
-apt-get update > /dev/null
-apt-get install -y -qq figlet > dev/null
+apt-get update
+apt-get install -y -qq figlet
 
 
 ## MCP OS - Install Script
@@ -29,13 +29,10 @@ if ! [ $(id -u) = 0 ]; then
    exit 1
 fi
 
-# set -e
-
-
 # rm -rf /etc/apt/sources.list > /dev/null
 # wget -O /etc/apt/sources.list http://miningcontrolpanel.com/mcpos/sources.list > /dev/null
 sudo sed -i 's/deb cdrom/#deb cdrom/g' /etc/apt/sources.list
-sudo apt-get install -y net-tools dnsutils git > /dev/null
+sudo apt-get install -y net-tools dnsutils git
 
 
 ## set vars
@@ -66,8 +63,8 @@ sudo apt-get -y upgrade > /dev/null
 echo "Installing Dependencies"
 echo " "
 ## apt-get install -y -qq llvm-3.9 clang-3.9 software-properties-common build-essential htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools > /dev/null
-sudo apt-get install -y figlet aha bc screen cmake software-properties-common htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw shellinabox > /dev/null
-sudo updatedb > /dev/null
+sudo apt-get install -y figlet aha bc screen cmake software-properties-common htop nload nmap sudo zlib1g-dev gcc make git autoconf autogen automake pkg-config locate curl php php-dev php-curl dnsutils sshpass fping net-tools lshw shellinabox
+sudo updatedb
 
 
 # setup SSH identity

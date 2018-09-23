@@ -26,7 +26,7 @@ echo "System Health: $UPTIME"
 
 echo "MCP Miner ID: $MINER_ID"
 
-echo "LAN IP: $IPADDRESS | SSH PORT: $SSHPORT | WEB SSH: http://$IPADDRESS:4200" 
+echo "LAN IP: $IPADDRESS | SSH PORT: $SSHPORT | WEB SSH: https://$IPADDRESS:4200" 
 
 echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
 
