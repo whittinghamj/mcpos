@@ -230,9 +230,16 @@ if($task == "miner_checkin")
 	$miner['hashrate']		= $hashrate;
 	$miner['uptime']		= $system['uptime'];
 
+	$check_for_nvidia = exec('lspci | grep VGA | grep NVIDIA | wc -l');
+	$check_for_ati = exec('lspci | grep VGA | grep ATI | wc -l');
+
+	if($check_for_nvidia > 0){
+		$miner['hardware'] = 'nvidiagpu';
+	}elseif($check_for_ati > 0){
+		$miner['hardware'] = 'atigpu';
+	}
+
 	foreach(range(0, $system['gpus']['total'], 1) as $gpu_id){
-		$check_for_nvidia = exec('lspci | grep VGA | grep NVIDIA | wc -l');
-		$check_for_ati = exec('lspci | grep VGA | grep ATI | wc -l');
 
 		if($check_for_nvidia > 0){
 			// get nvidia card details
