@@ -84,7 +84,7 @@ if($task == 'miner_start')
 
 		console_output("Miner started.");
 		
-		exec('sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://33Z1aVUDJxofRz2QxvjkFnfqtLPifc2nWN@equihash.eu.nicehash.com:3357 > /mcp/logs/miner.log 2>&1 </dev/null & ');
+		exec('sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://3L65WoQ1cwpCe7RVYmseiYkYQNHxu9XiQ8@equihash.eu.nicehash.com:3357 > /mcp/logs/miner.log 2>&1 </dev/null & ');
 	}
 }
 
@@ -241,12 +241,12 @@ if($task == "miner_checkin")
 		
 		echo "GPU NAME: " . $gpu_name . "\n";
 
-		$miner_data['gpu_info'][$gpu_id]['name'] 		= $gpu_name;
-		$miner_data['gpu_info'][$gpu_id]['temp'] 		= $gpu_temp;
-		$miner_data['gpu_info'][$gpu_id]['fan_speed'] 	= $gpu_fan_speed;
+		$miner['gpu_info'][$gpu_id]['name'] 		= $gpu_name;
+		$miner['gpu_info'][$gpu_id]['temp'] 		= $gpu_temp;
+		$miner['gpu_info'][$gpu_id]['fan_speed'] 	= $gpu_fan_speed;
 	}
 
-
+	print_r($miner);
 
 	$data_string = json_encode($miner);
 
