@@ -244,13 +244,13 @@ if($task == "miner_checkin")
 		if($check_for_nvidia > 0){
 			// get nvidia card details
 			$gpu_name = exec('nvidia-smi -i '.$gpu_id.' --query-gpu=name --format=csv,noheader');
-			/*
 			if($gpu_name == 'No devices were found')
 			{
 				break;
 			}
-			*/
+
 			$gpu_temp = exec('nvidia-smi -i '.$gpu_id.' --query-gpu=temperature.gpu --format=csv,noheader');
+
 			$gpu_fan_speed = exec('nvidia-smi -q --gpu='.$gpu_id.' |grep Fan|cut -c 38-50|grep -o \'[0-9]*\'');
 			
 			echo "GPU NAME: " . $gpu_name . "\n";
