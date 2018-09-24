@@ -206,6 +206,9 @@ if($task == "miner_jobs")
 
 						sleep(5);
 
+						// killlock
+						killlock($lockfile);
+
 						// code for pausing miner
 						exec('sudo nohup sh /mcp/pause_miner.sh &');
 
