@@ -14,18 +14,18 @@ WHITE='\033[1;37m'
 SET='\033[0m'
 
 # remove old *.loc files
-rm -rf /mcp/*.loc
+# rm -rf /mcp/*.loc
 
 # remove old *.log files
-rm -rf /mcp/logs/*
+# rm -rf /mcp/logs/*
 
 # stop any old miners
-php -q /mcp/console.php miner_stop > /dev/null
+# php -q /mcp/console.php miner_stop > /dev/null
 
 # create new log files
-touch /mcp/logs/console.log
-touch /mcp/logs/deamon.log
-touch /mcp/logs/miner.log
+# touch /mcp/logs/console.log
+# touch /mcp/logs/deamon.log
+# touch /mcp/logs/miner.log
 
 # improve disk writes to less
 # mount -o remount,noatime,nodiratime,commit=120 /mnt/user
@@ -67,7 +67,7 @@ echo "[ ${GREEN}OK${SET} ] Booting MCP OS."
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Updating MCP OS."
-# sudo sh /mcp/update.sh
+git clone https://github.com/whittinghamj/mcpos.git . --quiet
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Configuring MCP OS."
