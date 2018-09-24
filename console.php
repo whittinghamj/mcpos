@@ -191,7 +191,8 @@ if($task == "miner_jobs")
 					{
 						console_output('UN-Pausing Miner');
 
-						// code for restarting miner				
+						// code for restarting miner
+						exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
 					}
 
 					$job['id']		= $miner_job['id'];
