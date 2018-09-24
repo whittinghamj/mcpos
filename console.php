@@ -185,6 +185,21 @@ if($task == "miner_jobs")
 
 						// code for pausing miner
 						exec('sh /mcp/pause_miner.sh');
+
+						$data_string = json_encode($miner_job['id']);
+
+						$ch = curl_init($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");                                                                      
+						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+						curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+							'Content-Type: application/json',                                                                                
+							'Content-Length: ' . strlen($data_string))                                                                       
+						);                                                                                                                   
+
+						$result = curl_exec($ch);
+
+						// print_r($result);
 					}
 
 					if($miner_job['job'] == 'unpause_miner')
@@ -193,6 +208,21 @@ if($task == "miner_jobs")
 
 						// code for restarting miner
 						exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
+
+						$data_string = json_encode($miner_job['id']);
+
+						$ch = curl_init($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");                                                                      
+						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+						curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+							'Content-Type: application/json',                                                                                
+							'Content-Length: ' . strlen($data_string))                                                                       
+						);                                                                                                                   
+
+						$result = curl_exec($ch);
+
+						// print_r($result);
 					}
 
 					$job['id']		= $miner_job['id'];
