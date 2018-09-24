@@ -188,6 +188,8 @@ if($task == "miner_jobs")
 
 						$data_string = json_encode($miner_job['id']);
 
+						console_output($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");
+
 						$ch = curl_init($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");                                                                      
 						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 						curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
