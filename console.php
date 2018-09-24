@@ -185,9 +185,6 @@ if($task == "miner_jobs")
 					{
 						console_output('Pausing Miner');
 
-						// code for pausing miner
-						exec('sh /mcp/pause_miner.sh');
-
 						$data_string = json_encode($miner_job['id']);
 
 						console_output($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");
@@ -204,6 +201,13 @@ if($task == "miner_jobs")
 						$result = curl_exec($ch);
 
 						// print_r($result);
+
+						sleep(5);
+
+						// code for pausing miner
+						exec('sh /mcp/pause_miner.sh');
+
+						break;
 					}
 
 					if($miner_job['job'] == 'unpause_miner')
