@@ -180,7 +180,7 @@ if($task == "miner_jobs")
 						sleep(5);
 
 						// code for rebooting miner
-						exec("sh /mcp/force_reboot.sh &");
+						exec("sudo nohup sh /mcp/force_reboot.sh &");
 					}
 
 					if($miner_job['job'] == 'pause_miner')
@@ -207,7 +207,7 @@ if($task == "miner_jobs")
 						sleep(5);
 
 						// code for pausing miner
-						exec('sh /mcp/pause_miner.sh &');
+						exec('sudo nohup sh /mcp/pause_miner.sh &');
 
 					}
 
