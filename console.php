@@ -90,9 +90,9 @@ if($task == 'miner_start')
 
 if($task == 'miner_stop')
 {
-	exec("sudo kill $(ps aux | grep '/mcp/miners' | awk '{print $2}') > /dev/null 2>&1");
-	exec("sudo kill $(ps aux | grep 'start_mining.sh' | awk '{print $2}') > /dev/null 2>&1");
-	exec("sudo kill $(ps aux | grep '.php' | awk '{print $2}') > /dev/null 2>&1");
+	exec("sudo kill $(ps aux | grep 'nohup' | awk '{print $2}') > /dev/null 2>&1");
+	// exec("sudo kill $(ps aux | grep 'start_mining.sh' | awk '{print $2}') > /dev/null 2>&1");
+	// exec("sudo kill $(ps aux | grep '.php' | awk '{print $2}') > /dev/null 2>&1");
 
 	exec("rm -rf /mcp/*.loc");
 	exec("echo '' > /mcp/logs/mining.logs");
@@ -184,6 +184,7 @@ if($task == "miner_jobs")
 						console_output('Pausing Miner');
 
 						// code for pausing miner
+						exec('sh /mcp/pause_miner.sh');
 					}
 
 					if($miner_job['job'] == 'unpause_miner')
