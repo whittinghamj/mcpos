@@ -266,6 +266,8 @@ if($task == "miner_checkin")
 		
 	}
 
+	$miner['software_version'] = $version;
+
 	print_r($miner);
 
 	$data_string = json_encode($miner);
