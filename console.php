@@ -234,9 +234,9 @@ if($task == "miner_checkin")
 	$check_for_ati = exec('lspci | grep VGA | grep ATI | wc -l');
 
 	if($check_for_nvidia > 0){
-		$miner['hardware'] = 'nvidiagpu';
+		$miner['hardware'] = 'nvidia_gpu';
 	}elseif($check_for_ati > 0){
-		$miner['hardware'] = 'atigpu';
+		$miner['hardware'] = 'ati_gpu';
 	}
 
 	foreach(range(0, $system['gpus']['total'], 1) as $gpu_id){
