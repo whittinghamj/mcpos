@@ -205,7 +205,7 @@ if($task == "miner_jobs")
 						sleep(5);
 
 						// code for pausing miner
-						exec('sh /mcp/pause_miner.sh');
+						exec('sh /mcp/pause_miner.sh &');
 
 						break;
 					}
