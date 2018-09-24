@@ -95,7 +95,9 @@ if($task == 'miner_stop')
 	// exec("sudo kill $(ps aux | grep '.php' | awk '{print $2}') > /dev/null 2>&1");
 
 	exec("rm -rf /mcp/*.loc");
-	exec("echo '' > /mcp/logs/mining.logs");
+	exec("echo '' > /mcp/logs/mining.logs 2>&1");
+
+	exec('sh /mcp/pause_miner.sh &');
 
 	console_output("Terminating all mining processes and cleaning log files.");
 }
@@ -178,7 +180,7 @@ if($task == "miner_jobs")
 						sleep(5);
 
 						// code for rebooting miner
-						exec("sh /mcp/force_reboot.sh");
+						exec("sh /mcp/force_reboot.sh &");
 					}
 
 					if($miner_job['job'] == 'pause_miner')
@@ -207,7 +209,6 @@ if($task == "miner_jobs")
 						// code for pausing miner
 						exec('sh /mcp/pause_miner.sh &');
 
-						break;
 					}
 
 					if($miner_job['job'] == 'unpause_miner')
@@ -304,6 +305,12 @@ if($task == "miner_checkin")
 			// no cards found
 		}
 		
+	}
+
+	if(empty($hashrate)){
+		$miner['miner_status'] = 'not_mining';
+	}else{
+		$miner['miner_status'] = 'mining';
 	}
 
 	$miner['software_version'] = $version;
