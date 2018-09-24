@@ -67,7 +67,10 @@ echo "[ ${GREEN}OK${SET} ] Booting MCP OS."
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Updating MCP OS."
-git clone https://github.com/whittinghamj/mcpos.git . --quiet
+## rm -rf /mcp
+## mkdir /mcp
+## cd /mcp
+## git clone https://github.com/whittinghamj/mcpos.git . --quiet
 sleep 1
 
 echo "[ ${GREEN}OK${SET} ] Configuring MCP OS."
