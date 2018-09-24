@@ -143,6 +143,8 @@ if($task == "miner_jobs")
 	
 	console_output("Getting miner jobs");
 
+	console_output($api_url."/api/?key=".$system['api_key']."&c=site_jobs&miner_id=".$system['miner_id']);
+
 	$miner_jobs_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=site_jobs&miner_id=".$system['miner_id']);
 	$miner_jobs = json_decode($miner_jobs_raw, true);
 
