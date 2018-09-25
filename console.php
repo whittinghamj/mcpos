@@ -130,6 +130,17 @@ if($task == 'miner_stop')
 
 if($task == 'miner_hashrate')
 {
+	$config_file_raw = file_get_contents('/mcp/miner_config.php');
+
+	$config_file = json_decode($config_file_raw, true);
+
+	if($config_file['gpu_miner_software_folder'] == 'claymore-eth-v11.9'){
+		$hashrate_bits = exec("cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | sed 's/\r/\n/g' | grep -a . | tail -n 30 | grep -a \" Total \" | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'");
+	}
+
+	print_r($hashrate_bits);
+
+	/*
 	$hashrate = exec("sh /mcp/stats.sh");
 
 	if(!empty($hashrate))
@@ -144,6 +155,7 @@ if($task == 'miner_hashrate')
 		exec("sudo php -q /mcp/console.php miner_start");
 		console_output("ERROR: No hashrate detected, restarting miner process.");
 	}
+	*/
 }
 
 if($task == 'miner_sanity')
