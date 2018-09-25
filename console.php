@@ -251,14 +251,9 @@ if($task == "miner_jobs")
 						$config_file .= "\n";
 						$config_file .= $miner_config;
 
-						// file_put_contents('/mcp/miner_config.php', print_r($config_file, true));
+						file_put_contents('/mcp/miner_config.php', $miner_config_raw, true));
 
-						$fp = fopen('/mcp/miner_config.php', 'w');
-						fwrite($fp, var_dump($miner_config, true));
-						// fwrite($fp, print_r($config_file, TRUE));
-						fclose($fp);
-
-						print_r($miner_config);
+						// print_r($miner_config);
 
 						/*
 						exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
