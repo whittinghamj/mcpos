@@ -62,39 +62,50 @@ if($task == 'miner_start')
 	}else{
 		// exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
 
-		console_output("Starting miner...");
-
-		console_output("");
-
-		console_output("Setting: DISPLAY:0");
-		exec("export DISPLAY=:0");
-
-		console_output("Setting: DISGPU_MAX_ALLOC_PERCENTPLAY:100");
-		exec("export GPU_MAX_ALLOC_PERCENT=100");
-
-		console_output("Setting: GPU_USE_SYNC_OBJECTS:1");
-		exec("export GPU_USE_SYNC_OBJECTS=1");
-
-		console_output("Setting: GPU_SINGLE_ALLOC_PERCENT:100");
-		exec("export GPU_SINGLE_ALLOC_PERCENT=100");
-
-		console_output("Setting: GPU_MAX_HEAP_SIZE:100");
-		exec("export GPU_MAX_HEAP_SIZE=100");
-
-		console_output("Setting: GPU_FORCE_64BIT_PTR:1");
-		exec("export GPU_FORCE_64BIT_PTR=1");
-
-		console_output("");
-
-		console_output("Miner started.");
-
-		// get latest config file reading
 		$config_file_raw = file_get_contents('/mcp/miner_config.php');
 
 		$config_file = json_decode($config_file_raw, true);
 
-		console_output('sudo nohup '.$config_file['gpu_miner_cmd'].' > /mcp/logs/miner.log 2>&1 </dev/null & ');
-		exec('sudo nohup '.$config_file['gpu_miner_cmd'].' > /mcp/logs/miner.log 2>&1 </dev/null & ');
+		if($config_file['paused'] == 'no')
+		{
+			exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
+			console_output("Starting miner...");
+
+			console_output("");
+
+			console_output("Setting: DISPLAY:0");
+			exec("export DISPLAY=:0");
+
+			console_output("Setting: DISGPU_MAX_ALLOC_PERCENTPLAY:100");
+			exec("export GPU_MAX_ALLOC_PERCENT=100");
+
+			console_output("Setting: GPU_USE_SYNC_OBJECTS:1");
+			exec("export GPU_USE_SYNC_OBJECTS=1");
+
+			console_output("Setting: GPU_SINGLE_ALLOC_PERCENT:100");
+			exec("export GPU_SINGLE_ALLOC_PERCENT=100");
+
+			console_output("Setting: GPU_MAX_HEAP_SIZE:100");
+			exec("export GPU_MAX_HEAP_SIZE=100");
+
+			console_output("Setting: GPU_FORCE_64BIT_PTR:1");
+			exec("export GPU_FORCE_64BIT_PTR=1");
+
+			console_output("");
+
+			console_output("Miner started.");
+
+			// get latest config file reading
+			$config_file_raw = file_get_contents('/mcp/miner_config.php');
+
+			$config_file = json_decode($config_file_raw, true);
+
+			console_output('sudo nohup '.$config_file['gpu_miner_cmd'].' > /mcp/logs/miner.log 2>&1 </dev/null & ');
+			exec('sudo nohup '.$config_file['gpu_miner_cmd'].' > /mcp/logs/miner.log 2>&1 </dev/null & ');
+		}else{
+			console_output("Miner tried to start but is marked as paused.");
+		}
+
 	}
 }
 
