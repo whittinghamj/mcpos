@@ -252,10 +252,10 @@ if($task == "miner_jobs")
 						$config_file .= var_export($miner_config, true);
 
 						// write json array
-						// file_put_contents('/mcp/miner_config.php', $miner_config_raw, true);
+						file_put_contents('/mcp/miner_config.php', $miner_config_raw, true);
 
 						// write php array
-						file_put_contents('/mcp/miner_config.php', $config_file, true);
+						// file_put_contents('/mcp/miner_config.php', $config_file, true);
 
 						// print_r($miner_config);
 
