@@ -112,7 +112,7 @@ if($task == 'miner_stop')
 	exec("echo '' > /mcp/logs/mining.logs 2>&1");
 
 	console_output("Running pause script to stop miner auto starting..");
-	exec('sh /mcp/pause_miner.sh &');
+	exec('sudo nohup sh /mcp/pause_miner.sh &');
 
 	console_output("Done.");
 }
