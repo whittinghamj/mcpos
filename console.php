@@ -289,7 +289,7 @@ if($task == "miner_jobs")
 
 						$result = curl_exec($ch);
 
-						// exec("sudo php -q /mcp/console.php miner_restart");
+						exec("sudo php -q /mcp/console.php miner_stop");
 
 						// print_r($result);
 					}
