@@ -46,7 +46,8 @@ $task = $argv[1];
 if($task == 'miner_restart')
 {
 	console_output("Restarting the miner process.");
-	exec("php -q /mcp/console.php miner_stop");
+	exec("sudo php -q /mcp/console.php miner_stop");
+	exec("sudo php -q /mcp/console.php miner_start");
 }
 
 if($task == 'miner_start')
@@ -59,6 +60,8 @@ if($task == 'miner_start')
 		console_output("Miner is already running, existing.");
 		die();
 	}else{
+		exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
+		
 		console_output("Starting miner...");
 
 		console_output("");
