@@ -61,7 +61,7 @@ if($task == 'miner_start')
 		die();
 	}else{
 		exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
-		
+
 		console_output("Starting miner...");
 
 		console_output("");
@@ -100,16 +100,21 @@ if($task == 'miner_start')
 
 if($task == 'miner_stop')
 {
+	console_output("Killing all miner processes.");
 	exec("sudo kill $(ps aux | grep 'miners' | awk '{print $2}') > /dev/null 2>&1");
 	// exec("sudo kill $(ps aux | grep 'start_mining.sh' | awk '{print $2}') > /dev/null 2>&1");
 	// exec("sudo kill $(ps aux | grep '.php' | awk '{print $2}') > /dev/null 2>&1");
 
+	console_output("Removing old lock files.");
 	exec("rm -rf /mcp/*.loc");
+
+	console_output("Wiping mining log files..");
 	exec("echo '' > /mcp/logs/mining.logs 2>&1");
 
+	console_output("Running pause script to stop miner auto starting..");
 	exec('sh /mcp/pause_miner.sh &');
 
-	console_output("Terminating all mining processes and cleaning log files.");
+	console_output("Done.");
 }
 
 if($task == 'miner_hashrate')
