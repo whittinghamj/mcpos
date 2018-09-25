@@ -84,8 +84,14 @@ if($task == 'miner_start')
 		console_output("");
 
 		console_output("Miner started.");
-		
-		exec('sudo nohup /mcp/miners/bminer-zec-nvidia/bminer -uri stratum://3L65WoQ1cwpCe7RVYmseiYkYQNHxu9XiQ8@equihash.eu.nicehash.com:3357 > /mcp/logs/miner.log 2>&1 </dev/null & ');
+
+		// get latest config file reading
+		$config_file_raw = file_get_contents('/mcp/miner_config.php');
+
+		$config_file = json_decode($config_file_raw, true);
+
+		console_output('sudo nohup '.$config_file['gpu_miner_cmd'].' > /mcp/logs/miner.log 2>&1 </dev/null & ');
+		exec('sudo nohup '.$config_file['gpu_miner_cmd'].' > /mcp/logs/miner.log 2>&1 </dev/null & ');
 	}
 }
 
