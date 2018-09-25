@@ -249,7 +249,7 @@ if($task == "miner_jobs")
 
 						$config_file = "<?php";
 						$config_file .= "\n";
-						$config_file .= print_r($miner_config, true);
+						$config_file .= var_export($miner_config, true);
 
 						// write json array
 						// file_put_contents('/mcp/miner_config.php', $miner_config_raw, true);
