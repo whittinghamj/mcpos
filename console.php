@@ -60,7 +60,7 @@ if($task == 'miner_start')
 		console_output("Miner is already running, existing.");
 		die();
 	}else{
-		exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
+		// exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
 
 		console_output("Starting miner...");
 
