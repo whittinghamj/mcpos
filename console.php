@@ -45,6 +45,7 @@ $task = $argv[1];
 
 if($task == 'miner_restart')
 {
+	console_output("Restarting the miner process.");
 	exec("php -q /mcp/console.php miner_stop");
 }
 
@@ -259,7 +260,6 @@ if($task == "miner_jobs")
 
 						// print_r($miner_config);
 
-						/*
 						exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
 
 						$data_string = json_encode($miner_job['id']);
@@ -275,8 +275,9 @@ if($task == "miner_jobs")
 
 						$result = curl_exec($ch);
 
+						exec("sudo php -q /mcp/console.php miner_restart");
+
 						// print_r($result);
-						*/
 					}
 
 					$job['id']		= $miner_job['id'];
