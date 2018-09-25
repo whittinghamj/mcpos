@@ -134,10 +134,6 @@ if($task == 'miner_hashrate')
 
 	$config_file = json_decode($config_file_raw, true);
 
-	if($config_file['gpu_miner_software_folder'] == 'claymore-eth-v11.9'){
-		$hashrate_bits = exec("cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | sed 's/\r/\n/g' | grep -a . | tail -n 30 | grep -a \" Total \" | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'");
-	}
-
 	if($config_file['gpu_miner_software_folder'] == 'bminer-zec-nvidia'){
 		$hashrate_bits = exec("cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | sed 's/\r/\n/g' | grep -a . | tail -n 30 | grep -a ' Total ' | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'");
 	}
