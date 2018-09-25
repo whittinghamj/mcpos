@@ -239,9 +239,11 @@ if($task == "miner_jobs")
 
 					if($miner_job['job'] == 'update_miner_config')
 					{
-						console_output('UN-Pausing Miner');
-
+						console_output('Updating Miner Config');
+						console_output($api_url."/api/?key=".$system['api_key']."&c=miner_gpu_get_config&miner_id=".$system['miner_id']);
+						
 						// code for updating miner config
+
 						$miner_config_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=miner_gpu_get_config&miner_id=".$system['miner_id']);
 						$miner_config = json_decode($miner_config_raw, true);
 
