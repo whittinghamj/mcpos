@@ -247,11 +247,11 @@ if($task == "miner_jobs")
 						$miner_config_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=miner_gpu_get_config&miner_id=".$system['miner_id']);
 						$miner_config = json_decode($miner_config_raw, true);
 
-						$config_file = '<?php';
-						$config_file .= '';
+						$config_file = "<?php";
+						$config_file .= "\n";
 						$config_file .= $miner_config;
 
-						file_put_contents('/mcp/miner_config.php', $config_file);
+						file_put_contents('/mcp/miner_config.php', print_r($config_file, true));
 
 						print_r($miner_config);
 
