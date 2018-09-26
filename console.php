@@ -344,10 +344,6 @@ if($task == "miner_checkin")
 
 	$hashrate = exec("sh /mcp/stats.sh");
 
-	$hashrate_bits = explode(" ", $hashrate);
-
-	$hashrate = $hashrate_bits[0];
-
 	$miner['miner_id']		= $system['miner_id'];
 	$miner['site_id']		= $system['site_id'];
 	$miner['ip_address']	= $system['ip_address'];
