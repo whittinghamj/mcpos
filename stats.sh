@@ -25,8 +25,8 @@ echo $CONSOLE_SHORT
 
 IFS=', ' read -r -a array <<< "$CONSOLE_SHORT"
 
-echo "${array[0]}"
-echo "${array[1]}"
-echo "${array[2]}"
-echo "${array[3]}"
-echo "${array[4]}"
+echo "${IFS[0]}"
+echo "${IFS[1]}"
+echo "${IFS[2]}"
+echo "${IFS[3]}"
+echo "${IFS[4]}"
