@@ -27,13 +27,15 @@ fi
 
 ### ethminer
 if [ $MINER_NAME = "claymore-eth-v11.9" ]; then
-   CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | awk -F" Speed " '{ print $2 }' | awk '{ print $1" "$2 }'`
+   CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
+   CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | | awk '{print $5" "$6}'
+
    echo "Using ethminer / claymore"
 else
   echo "NOT using ethminer / claymore"
 fi
 
-CZY=`echo "$MINER_PATH" | grep -i "bminer" | wc -l`
+# CZY=`echo "$MINER_PATH" | grep -i "bminer" | wc -l`
 # [ "$CZY" == "1" ] && CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
 
 ### ccminer-phi-anxmod-216k155
