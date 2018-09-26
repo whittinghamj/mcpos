@@ -150,4 +150,3 @@ CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | awk '{ print substr($0, 1, 30) }'`
 
 
 echo $CONSOLE_SHORT
-echo $CONSOLE
