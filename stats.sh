@@ -23,12 +23,6 @@ CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -
 
 echo $CONSOLE_SHORT
 
-OIFS=$IFS;
-IFS=" ";
-
- animalArray=($CONSOLE_SHORT);
-
-for ((i=0; i<${#animalArray[@]}; ++i)); do     echo "CONSOLE_SHORT $i: ${animalArray[$i]}"; done
 
 OIFS=$IFS;
 IFS="|";
