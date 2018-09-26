@@ -3,9 +3,9 @@
 JSON_CONFIG=$(cat /mcp/miner_config.php);
 MINER_NAME=`echo "$JSON_CONFIG" | jq -r .gpu_miner_software_folder`
 
-MINER_PATH='/mcp/miners/' $MINER_NAME
+MINER_PATH="/mcp/miners/$MINER_NAME"
 
-echo $MINER_name
+echo $MINER_NAME
 echo $MINER_PATH
 
 # preprocessing
