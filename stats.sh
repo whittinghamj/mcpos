@@ -23,4 +23,4 @@ CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -
 
 echo $CONSOLE_SHORT
 
-echo $CONSOLE_SHORT | awk '{print $4}'
+echo $CONSOLE_SHORT | awk '{print $5" "$6}'
