@@ -26,7 +26,7 @@ fi
 ### ethminer
 if [ $MINER_NAME = "claymore-eth-v11.9" ]; then
    CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
-   echo $CONSOLE_SHORT | awk '{print $5" "$6}'
+   echo $CONSOLE_SHORT | awk '{print $5" "$6}' | sed 's/,//g'
 fi
 
 # CZY=`echo "$MINER_PATH" | grep -i "bminer" | wc -l`
