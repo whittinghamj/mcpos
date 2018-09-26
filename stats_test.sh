@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 MINER_PATH=`/mcp/logs/miner.log`
 
