@@ -20,15 +20,17 @@ CONSOLE_SHORT_PRE=`cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | 
 ### bminer
 if [ $MINER_NAME = "bminer-zec-nvidia" ]; then
    CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
+   echo "Using bminer"
 else
-  echo "not using bminer"
+  echo "NOT using bminer"
 fi
 
 ### ethminer
 if [ $MINER_NAME = "claymore-eth-v11.9" ]; then
    CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | awk -F" Speed " '{ print $2 }' | awk '{ print $1" "$2 }'`
+   echo "Using ethminer / claymore"
 else
-  echo "not using ethminer / claymore"
+  echo "NOT using ethminer / claymore"
 fi
 
 CZY=`echo "$MINER_PATH" | grep -i "bminer" | wc -l`
