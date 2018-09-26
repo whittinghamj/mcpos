@@ -23,10 +23,10 @@ CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -
 
 echo $CONSOLE_SHORT
 
-IFS=', ' read -r -a array <<< "$CONSOLE_SHORT"
+IFS=' ' read -a hashrate_bits <<< "${CONSOLE_SHORT}"
 
-echo "${IFS[0]}"
-echo "${IFS[1]}"
-echo "${IFS[2]}"
-echo "${IFS[3]}"
-echo "${IFS[4]}"
+echo "${hashrate_bits[0]}"
+echo "${hashrate_bits[1]}"
+echo "${hashrate_bits[2]}"
+echo "${hashrate_bits[3]}"
+echo "${hashrate_bits[4]}"
