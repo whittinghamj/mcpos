@@ -23,10 +23,9 @@ CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -
 
 echo $CONSOLE_SHORT
 
-IFS=' ' read -a hashrate_bits <<< "${CONSOLE_SHORT}"
+OIFS=$IFS;
+IFS=" ";
 
-echo "${hashrate_bits[0]}"
-echo "${hashrate_bits[1]}"
-echo "${hashrate_bits[2]}"
-echo "${hashrate_bits[3]}"
-echo "${hashrate_bits[4]}"
+ animalArray=($CONSOLE_SHORT);
+
+for ((i=0; i<${#animalArray[@]}; ++i)); do     echo "CONSOLE_SHORT $i: ${animalArray[$i]}"; done
