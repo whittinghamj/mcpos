@@ -23,13 +23,9 @@ CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -
 
 echo $CONSOLE_SHORT
 
+foo="3,aac-lc, 93.8, aaclc, 77.3, h.264, 1024.6" 
 
-OIFS=$IFS;
-IFS="|";
-
-animals="dog|cat|fish|squirrel|bird|shark";
-animalArray=($animals);
-
-for ((i=0; i<${#animalArray[@]}; ++i)); do     echo "animal $i: ${animalArray[$i]}"; done
-
-IFS=$OIFS;
+IFS="," read -ra arr <<< "$foo"
+echo ${#arr[@]}
+echo ${arr[0]}
+echo ${arr[3]}
