@@ -20,20 +20,13 @@ CONSOLE_SHORT_PRE=`cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | 
 ### bminer
 if [ $MINER_NAME = "bminer-zec-nvidia" ]; then
    CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
-   CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | awk '{print $1" "$2}'
-   echo "Using bminer"
-else
-  echo "NOT using bminer"
+   echo $CONSOLE_SHORT | awk '{print $1" "$2}'
 fi
 
 ### ethminer
 if [ $MINER_NAME = "claymore-eth-v11.9" ]; then
    CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
-   CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | awk '{print $5" "$6}'
-
-   echo "Using ethminer / claymore"
-else
-  echo "NOT using ethminer / claymore"
+   echo $CONSOLE_SHORT | awk '{print $5" "$6}'
 fi
 
 # CZY=`echo "$MINER_PATH" | grep -i "bminer" | wc -l`
@@ -154,4 +147,4 @@ CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | tr -d '\001'-'\011''\013''\014''\016'-'\0
 CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | awk '{ print substr($0, 1, 30) }'`
 
 
-echo $CONSOLE_SHORT
+# echo $CONSOLE_SHORT
