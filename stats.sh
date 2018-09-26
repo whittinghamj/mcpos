@@ -22,3 +22,11 @@ CONSOLE_SHORT_PRE=`cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | 
 CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
 
 echo $CONSOLE_SHORT
+
+IFS=', ' read -r -a array <<< "$CONSOLE_SHORT"
+
+echo "${array[0]}"
+echo "${array[1]}"
+echo "${array[2]}"
+echo "${array[3]}"
+echo "${array[4]}"
