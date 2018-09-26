@@ -18,6 +18,13 @@ CONSOLE_SHORT_PRE=`cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | 
 
 
 ### bminer
+if [ $MINER_NAME = "bminer-zec-nvidia" ]; then
+   CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
+else
+  echo "not using bminer"
+fi
+
+
 CZY=`echo "$MINER_PATH" | grep -i "bminer" | wc -l`
 #[ "$CZY" == "1" ] && CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | awk '{ print $4" "$5 }'`
 [ "$CZY" == "1" ] && CONSOLE_SHORT=`echo "$CONSOLE_SHORT_PRE" | grep -a " Total " | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'`
@@ -136,3 +143,6 @@ CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | tr -d '\001'-'\011''\013''\014''\016'-'\0
 # make sure lines are not too long
 #CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | head -c 30`
 CONSOLE_SHORT=`echo "$CONSOLE_SHORT" | awk '{ print substr($0, 1, 30) }'`
+
+
+echo $CONSOLE_SHORT
