@@ -64,6 +64,7 @@ if($task == 'miner_start')
 		$config_file = file_get_contents("/mcp/miner_config.php");
 		if(empty($config_file))
 		{
+			console_output("Missing Miner Config, Downloading New Config Now.");
 			$miner_config_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=miner_gpu_get_config&miner_id=".$system['miner_id']);
 			$miner_config = json_decode($miner_config_raw, true);
 
