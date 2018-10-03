@@ -60,6 +60,21 @@ if($task == 'miner_start')
 		console_output("Miner is already running, existing.");
 		die();
 	}else{
+		// check if miner_config.php is populated, if not, build it.
+		$config_file = file_get_contents("/mcp/miner_config.php");
+		if(empty($config_file))
+		{
+			$miner_config_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=miner_gpu_get_config&miner_id=".$system['miner_id']);
+			$miner_config = json_decode($miner_config_raw, true);
+
+			$config_file = "<?php";
+			$config_file .= "\n";
+			$config_file .= var_export($miner_config, true);
+
+			// write json array
+			file_put_contents('/mcp/miner_config.php', $miner_config_raw, true);
+		}
+
 		// exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
 
 		$config_file_raw = file_get_contents('/mcp/miner_config.php');
