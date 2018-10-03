@@ -395,6 +395,10 @@ if($task == "miner_checkin")
 
 	$miner['software_version'] = $version;
 
+	$miner['mac_address'] = exec("nmap -sP ".$miner['ip_address']." | grep MAC");
+	$mac_bits = explode(" ", $miner['mac_address']);
+	$miner['mac_address'] = $mac_bits[2];
+
 	print_r($miner);
 
 	$data_string = json_encode($miner);
