@@ -395,7 +395,7 @@ if($task == "miner_checkin")
 
 	$miner['software_version'] = $version;
 
-	$miner['mac_address'] = exec("nmap -sP ".$miner['ip_address']." | grep MAC");
+	$miner['mac_address'] = exec("ip link show etb0 | awk '/ether/ {print $2}'");
 	$mac_bits = explode(" ", $miner['mac_address']);
 	$miner['mac_address'] = $mac_bits[2];
 
