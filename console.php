@@ -395,7 +395,7 @@ if($task == "miner_checkin")
 
 	$miner['software_version'] = $version;
 
-	$miner['mac_address'] = exec("ip link show etb0 | awk '/ether/ {print $2}'");
+	$miner['mac_address'] = exec("ip link show eth0 | awk '/ether/ {print $2}'");
 
 	print_r($miner);
 
