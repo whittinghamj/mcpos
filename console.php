@@ -142,7 +142,9 @@ if($task == 'miner_stop')
 
 if($task == 'miner_hashrate')
 {
-	echo exec("sh /mcp/stats.sh");
+	$hashrate = exec("sh /mcp/stats.sh");
+
+	console_output("Total Hashrate: " . $hashrate);
 
 	/*
 	$hashrate = exec("sh /mcp/stats.sh");
