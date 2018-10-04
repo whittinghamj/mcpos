@@ -22,7 +22,13 @@ SSHPORT=$(sshd -T | head -n 1 | awk '{print $2}');
 
 UPTIME="$(uptime)";
 
-echo "\033[0m\033[1m\033[5m@@ MCP OS Monitor @@\033[0m"
+echo "${GREEN}.:[ MCP OS Monitor ]:.${SET}"
+
+echo ""
+
+echo "+-----------------------------------------------------------------------------+"
+
+echo ""
 
 echo "System Health: $UPTIME"
 
@@ -44,7 +50,7 @@ then
     JSON_CONFIG=$(cat /mcp/miner_config.php);
     MINER_NAME=`echo "$JSON_CONFIG" | jq -r .gpu_miner_software_folder`
     HASHRATE="$(sh /mcp/stats.sh)";
-    BANDWIDTH="$(sh /mcp/get_bandwidth.sh)";
+    BANDWIDTH="$(sh /mcp/get_bandwidth.sh etho)";
 
     echo "Miner: $MINER_NAME"
     echo "Total Hashrate: $HASHRATE"
