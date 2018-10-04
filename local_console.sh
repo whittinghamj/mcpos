@@ -50,7 +50,7 @@ then
     JSON_CONFIG=$(cat /mcp/miner_config.php);
     MINER_NAME=`echo "$JSON_CONFIG" | jq -r .gpu_miner_software_folder`
     HASHRATE="$(sh /mcp/stats.sh)";
-    BANDWIDTH="$(sh /mcp/get_bandwidth.sh etho)";
+    BANDWIDTH="$(sh /mcp/get_bandwidth.sh eth0)";
 
     echo "Miner: $MINER_NAME"
     echo "Total Hashrate: $HASHRATE"
