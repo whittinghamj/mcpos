@@ -33,5 +33,5 @@ do
         RBPS=`expr $R2 - $R1`
         TKBPS=`expr $TBPS / 1024`
         RKBPS=`expr $RBPS / 1024`
-        echo "tx $1: $TKBPS kb/s rx $1: $RKBPS kb/s"
+        echo "Upload $1: $TKBPS kb/s | Download $1: $RKBPS kb/s"
 done
