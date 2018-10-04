@@ -39,8 +39,11 @@ fi
 
 if [ -s /mcp/site_key.txt ]
 then
+    JSON_CONFIG=$(cat /mcp/miner_config.php);
+    MINER_NAME=`echo "$JSON_CONFIG" | jq -r .gpu_miner_software_folder`
     HASHRATE="$(sh /mcp/stats.sh)";
 
+    echo "Miner: $MINER_NAME"
     echo "Miner Hashrate: $HASHRATE"
 
     ## echo "Bandwidth: $BANDWIDTH"
