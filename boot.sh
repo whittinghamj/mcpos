@@ -35,7 +35,7 @@ sysctl vm.dirty_background_ratio=20 > /dev/null
 sysctl vm.dirty_expire_centisecs=0 > /dev/null
 sysctl vm.dirty_ratio=80 > /dev/null
 sysctl vm.dirty_writeback_centisecs=0 > /dev/null
-sudo sysctl -w vm.nr_hugepages=128  > /dev/null
+sysctl -w vm.nr_hugepages=128  > /dev/null
 
 # set GPU settings
 export DISPLAY=:0
