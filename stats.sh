@@ -41,7 +41,8 @@ fi
 
 ### xmr
 if [ $MINER_NAME = "xmr-stak-v2.4.7-cuda9.1" ]; then
-    CONSOLE_SHORT=`cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | sed 's/\r/\n/g' | grep -a . | tail -n 30 | grep -a "Totals (ALL)" | tail -n 1 | awk '{ print $3" "$6 }'`
+   CONSOLE_SHORT=`cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | sed 's/\r/\n/g' | grep -a . | tail -n 30 | grep -a "Totals (ALL)" | tail -n 1 | awk '{ print $3" "$6 }'`
+   echo $CONSOLE_SHORT
 fi
 
 # cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | sed 's/\r/\n/g' | grep -a . | tail -n 30 | grep -a "Totals (ALL)" | tail -n 1 | awk '{ print $3" "$6 }'
