@@ -88,7 +88,7 @@ ATI=`lspci | grep VGA | grep ATI | wc -l`
 if [ "$NVIDIA" -gt "0" ]; then
       echo "[ ${GREEN}OK${SET} ] NVIDIA GPUs found."
       sleep 1
-      echo "[ ${GREEN}OK${SET} ] Loading monitors."
+      echo "[ ${GREEN}OK${SET} ] Loading MCP OS Monitor."
 
       sleep 3
       watch -n1 --color -t sudo sh /mcp/local_console.sh
@@ -100,6 +100,6 @@ fi
 if [ "$NVIDIA" -gt "0" ]; then
       echo "[ ${GREEN}OK${SET} ] ATI GPUs found."
       sleep 1
-      echo "No ATI monitors are installed yet."
+      tail -f /mcp/logs/miner.log
       exit 1
 fi
