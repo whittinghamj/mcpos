@@ -44,7 +44,7 @@ then
     HASHRATE="$(sh /mcp/stats.sh)";
 
     echo "Miner: $MINER_NAME"
-    echo "Miner Hashrate: $HASHRATE"
+    echo "Total Hashrate: $HASHRATE"
 
     ## echo "Bandwidth: $BANDWIDTH"
 
