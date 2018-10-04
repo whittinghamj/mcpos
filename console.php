@@ -60,21 +60,17 @@ if($task == 'miner_start')
 		console_output("Miner is already running, existing.");
 		die();
 	}else{
-		// check if miner_config.php is populated, if not, build it.
-		$config_file = file_get_contents("/mcp/miner_config.php");
-		if(empty($config_file))
-		{
-			console_output("Missing Miner Config, Downloading New Config Now.");
-			$miner_config_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=miner_gpu_get_config&miner_id=".$system['miner_id']);
-			$miner_config = json_decode($miner_config_raw, true);
+		console_output("Downloading latest configuration.");
+		// get latest config file for this miner
+		$miner_config_raw = file_get_contents($api_url."/api/?key=".$system['api_key']."&c=miner_gpu_get_config&miner_id=".$system['miner_id']);
+		$miner_config = json_decode($miner_config_raw, true);
 
-			$config_file = "<?php";
-			$config_file .= "\n";
-			$config_file .= var_export($miner_config, true);
+		$config_file = "<?php";
+		$config_file .= "\n";
+		$config_file .= var_export($miner_config, true);
 
-			// write json array
-			file_put_contents('/mcp/miner_config.php', $miner_config_raw, true);
-		}
+		// write json array
+		file_put_contents('/mcp/miner_config.php', $miner_config_raw, true);
 
 		// exec("sudo kill $(ps aux | grep 'pause_miner.sh' | awk '{print $2}') > /dev/null 2>&1");
 
@@ -146,16 +142,7 @@ if($task == 'miner_stop')
 
 if($task == 'miner_hashrate')
 {
-	$config_file_raw = file_get_contents('/mcp/miner_config.php');
-
-	$config_file = json_decode($config_file_raw, true);
-
-	if($config_file['gpu_miner_software_folder'] == 'bminer-zec-nvidia'){
-		$hashrate_bits = exec("cat /mcp/logs/miner.log | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' | sed 's/\r/\n/g' | grep -a . | tail -n 30 | grep -a ' Total ' | tail -n 1 | sed -e 's/.*Total \(.*\) Accepted.*/\1/'");
-	}
-
-
-	print_r($hashrate_bits);
+	echo exec("sh /mcp/stats.sh");
 
 	/*
 	$hashrate = exec("sh /mcp/stats.sh");
