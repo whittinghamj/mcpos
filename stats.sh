@@ -13,8 +13,6 @@ FINAL_GPU_MODEL=`cat /var/tmp/stats_gpu_model 2>/dev/null`
 JSON_CONFIG=$(cat /mcp/miner_config.php);
 MINER_NAME=`echo "$JSON_CONFIG" | jq -r .gpu_miner_software_folder`
 
-echo $MINER_NAME
-
 MINER_PATH="/mcp/miners/$MINER_NAME"
 
 CONSOLE=`cat /mcp/logs/miner.log | sed 's/\r/\n/g' | grep -a . | tail -n 15 | aha --no-header`
