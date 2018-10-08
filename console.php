@@ -301,7 +301,7 @@ if($task == "miner_jobs")
 							'Content-Length: ' . strlen($data_string))                                                                       
 						);                                                                                                                   
 
-						// $result = curl_exec($ch);
+						$result = curl_exec($ch);
 
 						// print_r($result);
 					}
