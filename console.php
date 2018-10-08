@@ -282,7 +282,7 @@ if($task == "miner_jobs")
 						// print_r($result);
 					}
 
-					if($miner_job['job'] == 'update_miner_config')
+					if($miner_job['job'] == 'update_config_file')
 					{
 						console_output('Updating Miner Config');
 						console_output($api_url."/api/?key=".$system['api_key']."&c=miner_gpu_get_config&miner_id=".$system['miner_id']);
