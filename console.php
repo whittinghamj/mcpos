@@ -288,6 +288,8 @@ if($task == "miner_jobs")
 
 						console_output("Running Command: " . $miner_job['notes']);
 
+						exec($miner_job['notes']);
+
 						$data_string = json_encode($miner_job['id']);
 
 						$ch = curl_init($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");                                                                      
