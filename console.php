@@ -440,3 +440,27 @@ if($task == "miner_checkin")
 	killlock($lockfile);
 }
 
+if($task == 'run_command')
+{
+	console_output("Running Custom Command");
+
+	console_output($job['notes']);
+
+
+	/*
+	$hashrate = exec("sh /mcp/stats.sh");
+
+	if(!empty($hashrate))
+	{
+		$hashrate_bits = explode(" ", $hashrate);
+
+		$hashrate = $hashrate_bits[0] . ' ' . $hashrate_bits[1];
+
+		console_output("Hashrate: " . $hashrate);
+	}else{
+		exec("sudo php -q /mcp/console.php miner_stop");
+		exec("sudo php -q /mcp/console.php miner_start");
+		console_output("ERROR: No hashrate detected, restarting miner process.");
+	}
+	*/
+}
