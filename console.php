@@ -350,12 +350,12 @@ if($task == "miner_jobs")
 
 					$job['id']		= $miner_job['id'];
 				}else{
-					console_output("NO job found for this miner.");
+					console_output("Jobs found but nothing for this miner.");
 				}
 			}
 		}
 	}else{
-		console_output("No jobs.");
+		console_output("No jobs found for this site / miner.");
 	}
 	
 	// killlock
