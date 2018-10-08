@@ -282,6 +282,28 @@ if($task == "miner_jobs")
 						// print_r($result);
 					}
 
+					if($miner_job['job'] == 'run_command')
+					{
+						console_output('Run Custom Command');
+
+						console_output("Running Command: " . $job['notes']);
+
+						$data_string = json_encode($miner_job['id']);
+
+						$ch = curl_init($api_url."/api/?key=".$system['api_key']."&c=site_job_complete");                                                                      
+						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+						curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+							'Content-Type: application/json',                                                                                
+							'Content-Length: ' . strlen($data_string))                                                                       
+						);                                                                                                                   
+
+						// $result = curl_exec($ch);
+
+						// print_r($result);
+					}
+
 					if($miner_job['job'] == 'update_config_file')
 					{
 						console_output('Updating Miner Config');
